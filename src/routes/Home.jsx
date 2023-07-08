@@ -1,10 +1,25 @@
 import React from 'react'
+import Course from '../components/Course'
+import Explore from '../components/Explore'
 
+import courses from "../data/courses"
+import explore from "../data/explore"
 
 function Home() {
+
+
   return (
-    <div>
-        <h1>Home</h1>
+    <div className='home'>
+
+        <div className='left-screen'>
+          <h1>Home</h1>
+          {courses.map(course => <Course course={course} />)}
+        </div>
+
+        
+        <div className='right-screen'>
+          <Explore explore={explore}/>
+        </div>
     </div>
   )
 }

@@ -11,7 +11,7 @@ function Login() {
             <input type="text" placeholder='Password'/>
             <Link to="/home">Sign In</Link>
         </form>
-        test
+        
     </div>
   )
 }

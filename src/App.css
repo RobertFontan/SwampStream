@@ -1,9 +1,6 @@
 #root {
   margin: 0;
-  text-align: center;
 }
-
-
 
 @keyframes logo-spin {
   from {
@@ -21,29 +18,124 @@
 }
 
 
+.App{
+  display: flex;
+}
 
+/* Content - Main Screen */
+
+.content{
+  width: 100%;
+}
+
+/* Nav bar */
 
 nav{
   display: flex;
   flex-direction: column;
 
+  text-align: center;
+
   width: 150px;
   float: left;
   margin: 0;
-  padding: 0;
+  padding: 0px;
   margin-right: 10px;
   background-color: gray;
 
   height: 100vh;
 }
 
+nav h3{
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
 nav a {
+  padding: 5px;
   padding-bottom: 15px;
   border-bottom: 0.5px solid black;
 }
 
 
-.App{
+
+
+/* Home */
+.home{
   display: flex;
-  
+  justify-content: space-between;
+}
+
+.home h1 {
+  justify-self: baseline;
+  align-self: flex-start;
+}
+
+.home .left-screen{
+  display: flex;
+  flex-direction: column;
+}
+
+/* Explore in Home */
+
+.explore{
+  color: black;
+  text-align: center;
+  background-color: lightgray;
+  padding: 20px;
+  margin-top: 20px;
+  margin-right: 100px;
+  border-radius: 15px;
+}
+
+/* Course */
+
+.course {
+  display: flex;
+  flex-direction: column;
+}
+
+.course h1 {
+  align-self: baseline;
+  font-size: 2rem;
+}
+
+.course-videos{
+  display: flex;
+  gap: 20px;
+}
+
+/* Video */
+.video{
+  height: 200px;
+  width: 200px;
+
+  /* display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-decoration: none; */
+
+}
+
+.video p:hover {
+  overflow: visible;
+  white-space:normal;
+
+}
+
+
+.video img{
+  width: 200px;
+}
+
+.video p{
+  width: 200px;
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+  text-decoration: none;
+  font-size: 10px;
 }
