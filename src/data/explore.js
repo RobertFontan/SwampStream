@@ -5,7 +5,7 @@ export default[
     },
     {
         thumbnail: 'https://i.ytimg.com/vi/q7mp1wxLoyA/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCCpumKH8SF56HaWKiTjva5SsIQLA',
-        title: 'UF researchers are the first to collect animal DNA from beach sand'
+        title   : 'UF researchers are the first to collect animal DNA from beach sand'
     },
     {
         title: 'UF Research is...', 
