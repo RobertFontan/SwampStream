@@ -6,7 +6,6 @@ import courses from "../data/courses"
 import explore from "../data/explore"
 
 function Home() {
-  console.log('course', courses)
 
   return (  
     <div className='home'>

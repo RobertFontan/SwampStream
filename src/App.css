@@ -139,3 +139,41 @@ nav a {
   text-decoration: none;
   font-size: 10px;
 }
+
+/* Watching */
+
+.watching {
+ display: flex;
+ justify-content: space-between; 
+ margin-top: 20px;
+ gap: 5px;
+}
+
+.sidebar{
+  width: 400px;
+  margin-right: 50px;
+  border-radius: 10px;
+  padding: 15px;
+  background-color: lightgray;
+  height: 500px;
+  overflow: scroll;
+}
+
+.comments{
+  margin-top: 20px;
+  overflow: scroll;
+  height: 300px;
+  
+}
+/* Comments */
+.comment{
+  background-color: lightgrey;
+  display: flex;
+  gap: 5px;
+  border-bottom: 0.5px solid black;
+  
+}
+
+.comment .user{
+  font-weight: bold;
+}
