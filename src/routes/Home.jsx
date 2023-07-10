@@ -6,9 +6,9 @@ import courses from "../data/courses"
 import explore from "../data/explore"
 
 function Home() {
+  console.log('course', courses)
 
-
-  return (
+  return (  
     <div className='home'>
 
         <div className='left-screen'>
