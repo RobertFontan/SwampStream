@@ -4,10 +4,6 @@ import comments from '../data/comments';
 
 import Comment from '../components/Comment';
 function Watching() {
-  
-  
-
-
   const opts = {
     height: '390',
     width: '640',
@@ -16,15 +12,16 @@ function Watching() {
     },
   };
 
+
+
+
   return (
     <div className='watching'>
       <div className="left-screen">
         <div className="video-player">
           <Youtube videoId='xdXd8BJwJ-U' opts={opts} onReady={(e) => e.target.pauseVideo()} />
         </div>
-        <div className="comments">
-          {comments.map(comment => <Comment comment={comment} />)}
-        </div>
+      <Comment comments={comments} />
       </div>
       <div className='right-screen'>
         <div className="sidebar">

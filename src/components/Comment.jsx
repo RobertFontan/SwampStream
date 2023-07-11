@@ -1,14 +1,20 @@
 import React from 'react'
 
-function Comment({comment}) {
+function Comment({comments}) {
+
+
+
   return (
-    <div className='comment'>
-        <div className='user'>
-            {comment.user}
-        </div>
-        <div className='text'>
-            {comment.text}
-        </div>
+    <div className='comments'>
+      {comments.map(comment =>
+      <div className='comment'>
+          <div className='user'>
+              {comment.user}
+          </div>
+          <div className='text'>
+              {comment.text}
+          </div>
+      </div>)}
     </div>
   )
 }
