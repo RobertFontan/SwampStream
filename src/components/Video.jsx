@@ -3,9 +3,11 @@ import { Link } from 'react-router-dom'
 
 function Video({video}) {
   
+  console.log('selected videoID', video.videoID)
+
   return (
     
-    <Link to="/watching">
+    <Link to={"/watching/" + video.videoID}>
       <div className='video'>
           <img src={video.thumbnail} alt="Thumbnail for selected video" />
           <p>{video.title}</p>

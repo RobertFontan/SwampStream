@@ -3,7 +3,11 @@ import Youtube from 'react-youtube'
 import comments from '../data/comments';
 
 import Comment from '../components/Comment';
+import { useParams } from 'react-router-dom';
 function Watching() {
+
+  const {videoID} = useParams()
+
   const opts = {
     height: '390',
     width: '640',
@@ -19,7 +23,7 @@ function Watching() {
     <div className='watching'>
       <div className="left-screen">
         <div className="video-player">
-          <Youtube videoId='xdXd8BJwJ-U' opts={opts} onReady={(e) => e.target.pauseVideo()} />
+          <Youtube videoId={videoID} opts={opts} onReady={(e) => e.target.pauseVideo()} />
         </div>
       <Comment comments={comments} />
       </div>
