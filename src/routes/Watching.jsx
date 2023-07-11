@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Youtube from 'react-youtube'
 import comments from '../data/comments';
 
@@ -9,7 +9,9 @@ function Watching() {
   // what should happen when watching is clicked ? 
 
   const {videoID} = useParams()
-  
+  const [description, setDescription] = useState(null)
+
+
   const opts = {
     height: '390',
     width: '640',
@@ -24,6 +26,7 @@ function Watching() {
   const fetchData = async () => {
     const response = await axios.get(fetchURL)
     console.log('snippet data', response.data.items[0].snippet)
+    setDescription(response.data.items[0].snippet.description)
     console.log('description', response.data.items[0].snippet.description)
     console.log('thumbnails', response.data.items[0].snippet.thumbnails)
     
@@ -40,7 +43,10 @@ function Watching() {
         <div className="video-player">
           <Youtube videoId={videoID} opts={opts} onReady={(e) => e.target.pauseVideo()} />
         </div>
-      <Comment comments={comments} />
+        <div className="description">
+          {description && <p>{description}</p>}
+        </div>
+        <Comment comments={comments} />
       </div>
       <div className='right-screen'>
         <div className="sidebar">
