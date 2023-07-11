@@ -4,10 +4,12 @@ import comments from '../data/comments';
 
 import Comment from '../components/Comment';
 import { useParams } from 'react-router-dom';
+import axios from 'axios';
 function Watching() {
+  // what should happen when watching is clicked ? 
 
   const {videoID} = useParams()
-
+  
   const opts = {
     height: '390',
     width: '640',
@@ -16,7 +18,20 @@ function Watching() {
     },
   };
 
+  const API_KEY = "AIzaSyCIFWHUm93iCiFfytTQGPtu-MzyXoUrIAY"
+  const fetchURL = `https://youtube.googleapis.com/youtube/v3/videos?part=snippet&id=${videoID}&key=${API_KEY}`
 
+  const fetchData = async () => {
+    const response = await axios.get(fetchURL)
+    console.log('snippet data', response.data.items[0].snippet)
+    console.log('description', response.data.items[0].snippet.description)
+    console.log('thumbnails', response.data.items[0].snippet.thumbnails)
+    
+  }
+
+  useEffect(() => {
+    fetchData()
+  }, [])
 
 
   return (

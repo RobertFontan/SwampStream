@@ -3,6 +3,9 @@ import React from 'react'
 function Comment({comments}) {
   console.log(comments)
 
+  
+
+
   return (
     <div className='comments'>
       {comments.map(comment =>
