@@ -29,7 +29,7 @@ function App() {
         <div className="content">
           <Routes>
                <Route path="/" element={<Home />}/>
-               <Route path="/watching" element={<Watching />}/>
+               <Route path="/watching/:videoID" element={<Watching />}/>
                <Route path="/notes" element={<Notes />}/>
                <Route path="/saved" element={<Saved />}/>
                <Route path="/history" element={<History />}/>
