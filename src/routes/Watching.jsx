@@ -5,12 +5,16 @@ import comments from '../data/comments';
 import Comment from '../components/Comment';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+
+import Accordion from 'react-bootstrap/Accordion'
+
 function Watching() {
   // what should happen when watching is clicked ? 
 
   const {videoID} = useParams()
   const [description, setDescription] = useState(null)
 
+  const [open, setOpen] = useState(false)
 
   const opts = {
     height: '390',
@@ -40,13 +44,19 @@ function Watching() {
   return (
     <div className='watching'>
       <div className="left-screen">
-        <div className="video-player">
-          <Youtube videoId={videoID} opts={opts} onReady={(e) => e.target.pauseVideo()} />
-        </div>
-        <div className="description">
-          {description && <p>{description}</p>}
-        </div>
-        <Comment comments={comments} />
+        <div className="video-player"><Youtube videoId={videoID} opts={opts} onReady={(e) => e.target.pauseVideo()} /></div>
+        
+        {/* <Button>Click me</Button> */}
+        {/* <Accordion defaultActiveKey="0">
+          <Accordion.Item eventKey='1'>
+            <Accordion.Header>Description</Accordion.Header>
+            <Accordion.Body>{description && <div id="description">{description}</div>}</Accordion.Body>
+          </Accordion.Item>
+          
+          <Comment comments={comments} />
+        </Accordion> */}
+      
+      
       </div>
       <div className='right-screen'>
         <div className="sidebar">
