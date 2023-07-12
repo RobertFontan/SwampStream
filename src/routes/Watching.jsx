@@ -1,12 +1,16 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Youtube from 'react-youtube'
 import comments from '../data/comments';
 
 import Comment from '../components/Comment';
 import { useParams } from 'react-router-dom';
+import axios from 'axios';
 function Watching() {
+  // what should happen when watching is clicked ? 
 
   const {videoID} = useParams()
+  const [description, setDescription] = useState(null)
+
 
   const opts = {
     height: '390',
@@ -16,7 +20,21 @@ function Watching() {
     },
   };
 
+  const API_KEY = "AIzaSyCIFWHUm93iCiFfytTQGPtu-MzyXoUrIAY"
+  const fetchURL = `https://youtube.googleapis.com/youtube/v3/videos?part=snippet&id=${videoID}&key=${API_KEY}`
 
+  const fetchData = async () => {
+    const response = await axios.get(fetchURL)
+    console.log('snippet data', response.data.items[0].snippet)
+    setDescription(response.data.items[0].snippet.description)
+    console.log('description', response.data.items[0].snippet.description)
+    console.log('thumbnails', response.data.items[0].snippet.thumbnails)
+    
+  }
+
+  useEffect(() => {
+    fetchData()
+  }, [])
 
 
   return (
@@ -25,7 +43,10 @@ function Watching() {
         <div className="video-player">
           <Youtube videoId={videoID} opts={opts} onReady={(e) => e.target.pauseVideo()} />
         </div>
-      <Comment comments={comments} />
+        <div className="description">
+          {description && <p>{description}</p>}
+        </div>
+        <Comment comments={comments} />
       </div>
       <div className='right-screen'>
         <div className="sidebar">
