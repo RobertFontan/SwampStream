@@ -36,12 +36,12 @@ nav{
 
   text-align: center;
 
-  width: 150px;
+  width: 20vw;
   float: left;
   margin: 0;
   padding: 0px;
   margin-right: 10px;
-  background-color: gray;
+  background-color: #EFEFEF;
 
   height: 100vh;
 }
@@ -176,4 +176,8 @@ nav a {
 
 .comment .user{
   font-weight: bold;
+}
+
+.notes nav {
+  background-color: white;
 }
