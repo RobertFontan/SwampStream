@@ -5,7 +5,7 @@ import courses from '../data/courses'
 function Saved() {
   return (
     <div>
-      <h1>Saved!</h1>
+      <h1>Saved</h1>
       <div className='left-screen'>
           {courses.map(course => <Course course={course} />)}
       </div>
