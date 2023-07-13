@@ -46,15 +46,15 @@ function Watching() {
       <div className="left-screen">
         <div className="video-player"><Youtube videoId={videoID} opts={opts} onReady={(e) => e.target.pauseVideo()} /></div>
         
-        {/* <Button>Click me</Button> */}
-        {/* <Accordion defaultActiveKey="0">
+        {}
+        { <Accordion defaultActiveKey="0">
           <Accordion.Item eventKey='1'>
             <Accordion.Header>Description</Accordion.Header>
             <Accordion.Body>{description && <div id="description">{description}</div>}</Accordion.Body>
           </Accordion.Item>
           
           <Comment comments={comments} />
-        </Accordion> */}
+        </Accordion>}
       
       
       </div>
@@ -66,9 +66,9 @@ function Watching() {
         </div>
       </div>
 
-      {/* <VideoPlayer />
+      {/*<VideoPlayer />
       <Comments />
-      <SideBar /> */}
+  <SideBar />*/}
       
     
     </div>

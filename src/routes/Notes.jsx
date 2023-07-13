@@ -1,9 +1,10 @@
 import React from 'react'
+import Note from '../components/Note'
 
 function Notes() {
   return (
     <div>
-      Notes
+    <Note/>
     </div>
   )
 }
