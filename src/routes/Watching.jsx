@@ -8,6 +8,7 @@ import axios from 'axios';
 
 import Accordion from 'react-bootstrap/Accordion'
 
+
 function Watching() {
   // what should happen when watching is clicked ? 
 
@@ -47,14 +48,14 @@ function Watching() {
         <div className="video-player"><Youtube videoId={videoID} opts={opts} onReady={(e) => e.target.pauseVideo()} /></div>
         
         {/* <Button>Click me</Button> */}
-        {/* <Accordion defaultActiveKey="0">
+        <Accordion defaultActiveKey="0">
           <Accordion.Item eventKey='1'>
             <Accordion.Header>Description</Accordion.Header>
             <Accordion.Body>{description && <div id="description">{description}</div>}</Accordion.Body>
           </Accordion.Item>
           
           <Comment comments={comments} />
-        </Accordion> */}
+        </Accordion>
       
       
       </div>
