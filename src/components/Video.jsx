@@ -7,7 +7,7 @@ function Video({video}) {
 
   return (
     
-    <Link to={"/watching/" + video.videoID}>
+    <Link to={"/watching/" + video.videoID} onClick={video.visited = true}>
       <div className='video'>
           <img src={video.thumbnail} alt="Thumbnail for selected video" />
           <p>{video.title}</p>
