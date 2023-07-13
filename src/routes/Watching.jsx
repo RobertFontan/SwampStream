@@ -8,6 +8,7 @@ import axios from 'axios';
 
 import Accordion from 'react-bootstrap/Accordion'
 
+
 function Watching() {
   // what should happen when watching is clicked ? 
 
