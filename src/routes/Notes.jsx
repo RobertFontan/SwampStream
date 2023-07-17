@@ -1,16 +1,13 @@
 import React from 'react'
-import './Notes.css'
+import Note from '../components/Note'
 
 function Notes() {
   return (
-    <div className = "notes">
-      Notes hello
-
-      <nav>
-        <div>video one</div>
-        <div>video two</div>
-      </nav>
+    <div>
+    <Note/>
+    <button id="notes-button"> Button</button>
     </div>
+
   )
 }
 
