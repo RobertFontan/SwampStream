@@ -3,9 +3,13 @@ import Youtube from 'react-youtube'
 import comments from '../data/comments';
 
 import Comment from '../components/Comment';
+import NotesSidebar from '../components/NotesSidebar';
+
+
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
+import Button from 'react-bootstrap/Button'
 import Accordion from 'react-bootstrap/Accordion'
 
 
@@ -62,7 +66,7 @@ function Watching() {
       </div>
       <div className='right-screen'>
         <div className="sidebar">
-          <textarea className='note-sidebar' rows='4' cols='50' />
+          <NotesSidebar />
         </div>
       </div>
     
