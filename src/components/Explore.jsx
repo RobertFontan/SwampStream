@@ -4,8 +4,10 @@ import Video from './Video'
 function Explore({explore}) {
   return (
     <div className='explore'>
-        <h1>Explore</h1>
-        {explore && explore.map(vid => <Video video={vid} />)}
+        <h2>Explore</h2>
+        <div className='explore-videos'>
+          {explore && explore.map(vid => <Video video={vid} />)}
+        </div>
     </div>
   )
 }

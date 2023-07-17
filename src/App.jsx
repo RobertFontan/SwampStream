@@ -21,14 +21,14 @@ function App() {
   return (
     <BrowserRouter>
       <div className='App'>
-        <nav>
+        {/* <nav>
             <h3>SwampStream</h3>
             <Link to="/"> Home </Link>
             <Link to="/watching">Watching</Link>
             <Link to="/notes">Notes</Link>
             <Link to="/saved">Saved Videos</Link>
             <Link to="/history">History</Link>
-        </nav>
+        </nav> */}
         <div className="content">
           <Routes>
                <Route path="/" element={<Home />}/>
