@@ -21,7 +21,7 @@ function NotesSidebar({videoId}) {
       .single()
 
       if (data) {
-        c//onsole.log('notedata', data)
+        //console.log('notedata', data)
         setNotes(data.Notes)
       }
     } 

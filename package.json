@@ -18,7 +18,8 @@
     "react-bootstrap": "^2.8.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.14.1",
-    "react-youtube": "^10.1.0"
+    "react-youtube": "^10.1.0",
+    "youtube-transcript": "^1.0.6"
   },
   "devDependencies": {
     "@types/react": "^18.0.37",
