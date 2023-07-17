@@ -7,11 +7,10 @@ import Course from '../components/Course'
 import Explore from '../components/Explore'
 
 // dummy info
-// import courses from "../data/courses"
 import explore from "../data/explore"
 /* Bootstrap  */
 import { Container, Row, Col, Nav } from 'react-bootstrap'
-import updatedCourses from '../data/updatedCourses'
+import courses from '../data/courses'
 function Home() {
 
   //const playlistID = "PLoROMvodv4rMyupDF2O00r19JsmolyXdD" // depending on course 

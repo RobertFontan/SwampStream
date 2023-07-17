@@ -15,16 +15,13 @@ function Course({course}) {
 
   const fetchData = async () => {
     const response = await axios.get(fetchURL)
-    console.log('response', response)
-    // console.log('videos', response.data.items)
+    //console.log('response', response)
+    console.log('videos', response.data.items)
     setVideos(response.data.items)
     
   }
 
   
-
-
-
   useEffect(() => {
     fetchData()
   }, [])
@@ -33,8 +30,10 @@ function Course({course}) {
     <>
     {videos && <div className='course'>
         <h1>{course.title}</h1>
-        <div className="course-videos">{course.videos.filter((item, index) => index < 4).map(vid => <Video video={vid} />)}</div>
+        <div className="course-videos">{videos.filter((item, index) => index < 4).map(vid => <Video video={vid} />)}</div>
     </div>
+    }
+    </>
   )
 }
 

@@ -12,9 +12,6 @@ import {Container, Row, Col, Accordion} from 'react-bootstrap';
 import NotesSidebar from '../components/NotesSidebar';
 import Transcript from '../components/Transcript';
 
-import { useParams } from 'react-router-dom';
-import axios from 'axios';
-
 import Button from 'react-bootstrap/Button'
 function Watching() {
   // what should happen when watching is clicked ? 
