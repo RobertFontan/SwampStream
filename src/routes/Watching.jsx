@@ -15,7 +15,7 @@ function Watching() {
 
   const {videoID} = useParams()
   const [description, setDescription] = useState(null)
-
+  const [title, setTitle] = useState(null)
 
   const [sidebar, setSidebar] = useState("transcript") // 0 is transcript, 1 is notes
   
@@ -32,6 +32,7 @@ function Watching() {
 
   const fetchData = async () => {
     const response = await axios.get(fetchURL)
+    setTitle(response.data.items[0].snippet.title)
     setDescription(response.data.items[0].snippet.description)
     
   }
@@ -66,7 +67,7 @@ function Watching() {
       <div className='right-screen'>
         <Button onClick={()=> handleClick("notes")}>Notes</Button><Button onClick={() => handleClick("transcript")}>Transcript</Button>
         <div className="sidebar">
-          {sidebar === "transcript" ? <Transcript videoId={videoID}/>: <NotesSidebar videoId={videoID} />}
+          {sidebar === "transcript" ? <Transcript videoId={videoID}/>: <NotesSidebar title={title} videoId={videoID} />}
         </div>
       </div>
     

@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button'
 
 import supabase from '../config/supabaseClient'
 
-function NotesSidebar({videoId}) {
+function NotesSidebar({title ,videoId}) {
 
   // videoId: WW1g3UT2zww
 
@@ -45,7 +45,7 @@ function NotesSidebar({videoId}) {
     if(error == null){
       const { error } = await supabase
       .from('Notes')
-      .insert({ videoId, Notes: notes })
+      .insert({ title: title, videoId, Notes: notes })
     }
   }
 
