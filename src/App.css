@@ -37,7 +37,7 @@
   flex-direction: column;
   text-align: left;
   align-items: center;
-  width: 170px;
+  width: 20vw;
   float: left;
   padding: 0px;
   margin-right: 10px;
@@ -186,6 +186,25 @@
 .video-player{
   margin-top: 20px;
 }
+
+/* Notes Sidebar Component */
+
+.note-sidebar{
+  height: 100%;
+}
+
+.note-sidebar textarea{
+  resize: none;
+  width: 100%;
+  height: 100%;
+  /* border: 1px black solid; */
+  border: none;
+  outline: none;
+  background-color: transparent;
+  color: #000000;
+  font-size: large;
+}
+
 /* Comments */
 .comment{
   background-color: lightgrey;
@@ -197,4 +216,8 @@
 
 .comment .user{
   font-weight: bold;
+}
+
+.notes nav {
+  background-color: white;
 }
