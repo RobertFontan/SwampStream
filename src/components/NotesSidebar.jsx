@@ -12,6 +12,8 @@ function NotesSidebar({videoId}) {
   //console.log('vidid', videoId)
   const [notes, setNotes] = useState(null)
 
+
+  // getting notes 
   useEffect(() => {
     const fetchData = async () =>{
       const { data, error } = await supabase
@@ -21,7 +23,7 @@ function NotesSidebar({videoId}) {
       .single()
 
       if (data) {
-        c//onsole.log('notedata', data)
+        //console.log('notedata', data)
         setNotes(data.Notes)
       }
     } 
