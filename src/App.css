@@ -166,16 +166,22 @@ nav a {
   
 }
 
-/* Notes Sidebar */
+/* Notes Sidebar Component */
 
 .note-sidebar{
+  height: 100%;
+}
+
+.note-sidebar textarea{
   resize: none;
   width: 100%;
   height: 100%;
+  /* border: 1px black solid; */
   border: none;
   outline: none;
   background-color: transparent;
   color: #000000;
+  font-size: large;
 }
 
 /* Comments */
