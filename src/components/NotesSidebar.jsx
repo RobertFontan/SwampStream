@@ -1,22 +1,52 @@
 import React, {useState, useEffect} from 'react'
 import Button from 'react-bootstrap/Button'
 
+import supabase from '../config/supabaseClient'
 
+function NotesSidebar({videoId}) {
 
-function NotesSidebar() {
+  // videoId: WW1g3UT2zww
 
   // get from supabase if notes exist
+
+  console.log('vidid', videoId)
   const [notes, setNotes] = useState(null)
 
+  useEffect(() => {
+    const fetchData = async () =>{
+      const { data, error } = await supabase
+      .from('Notes')
+      .select('Notes')
+      .eq('videoId', videoId)
+      .single()
+
+      if (data) {
+        console.log('notedata', data)
+        setNotes(data.Notes)
+      }
+    } 
+    fetchData()
+  
+  }, [])
+
+
+
 
   
-  
-  const handleSave = () => {
+  // updates row if error insert row
+  const handleSave = async () => {
+    const {data, error} = await supabase
+    .from('Notes')
+    .update({'Notes': notes})
+    .eq('videoId', videoId)
 
-    // set supabase 
+    if(error == null){
+      const { error } = await supabase
+      .from('Notes')
+      .insert({ videoId, Notes: notes })
+    }
   }
 
-  // supabase pw: w9Kxb2FevOtDMDTF
 
   return (
     <div className='note-sidebar'>

@@ -1,7 +1,6 @@
 import React from 'react'
 
 function Comment({comments}) {
-  console.log(comments)
 
   
 
@@ -10,12 +9,8 @@ function Comment({comments}) {
     <div className='comments'>
       {comments.map(comment =>
       <div className='comment'>
-          <div className='user'>
-              {comment.user}
-          </div>
-          <div className='text'>
-              {comment.text}
-          </div>
+          <div className='user'>{comment.user}</div>
+          <div className='text'>{comment.text}</div>
       </div>)}
     </div>
   )
