@@ -2,13 +2,19 @@ import React, { useEffect, useState } from 'react'
 import Youtube from 'react-youtube'
 
 import Comment from '../components/Comment';
+import NavBar from '../components/Navbar';
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
+
+/* Bootstrap */
+import {Container, Row, Col, Accordion} from 'react-bootstrap';
+
 import NotesSidebar from '../components/NotesSidebar';
 import Transcript from '../components/Transcript';
 
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
-import Accordion from 'react-bootstrap/Accordion'
 import Button from 'react-bootstrap/Button'
 function Watching() {
   // what should happen when watching is clicked ? 
@@ -47,8 +53,13 @@ function Watching() {
   };
 
   return (
-    <div className='watching'>
-      <div className="left-screen">
+    <>
+    <Container fluid className='watching'>
+      <Row>
+      <Col lg={2}>
+        <NavBar/>
+      </Col>
+      <Col lg={6} className="left-screen">
         <div className="video-player"><Youtube videoId={videoID} opts={opts} onReady={(e) => e.target.pauseVideo()} /></div>
         <Accordion>
 
@@ -63,15 +74,22 @@ function Watching() {
           </Accordion.Item>
 
         </Accordion>      
-      </div>
-      <div className='right-screen'>
+      </Col>
+      <Col className='right-screen'>
         <Button onClick={()=> handleClick("notes")}>Notes</Button><Button onClick={() => handleClick("transcript")}>Transcript</Button>
         <div className="sidebar">
           {sidebar === "transcript" ? <Transcript videoId={videoID}/>: <NotesSidebar title={title} videoId={videoID} />}
         </div>
-      </div>
-    
-    </div>
+      </Col>
+
+      {/* <VideoPlayer />
+      <Comments />
+      <SideBar /> */}
+      
+      </Row>
+    </Container>
+    </>
+     
   )
 }
 

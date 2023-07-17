@@ -30,14 +30,11 @@ function Course({course}) {
   }, [])
   
   return (
-
     <>
     {videos && <div className='course'>
         <h1>{course.title}</h1>
-        <div className="course-videos">{videos.map(vid => <Video video={vid} />)}</div>
-    </div>}
-    </>
-    
+        <div className="course-videos">{course.videos.filter((item, index) => index < 4).map(vid => <Video video={vid} />)}</div>
+    </div>
   )
 }
 
