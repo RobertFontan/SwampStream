@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Youtube from 'react-youtube'
-import comments from '../data/comments';
+//import comments from '../data/comments';
 
 import Comment from '../components/Comment';
 import NotesSidebar from '../components/NotesSidebar';
@@ -34,10 +34,7 @@ function Watching() {
 
   const fetchData = async () => {
     const response = await axios.get(fetchURL)
-    //console.log('snippet data', response.data.items[0].snippet)
     setDescription(response.data.items[0].snippet.description)
-    //console.log('description', response.data.items[0].snippet.description)
-    //console.log('thumbnails', response.data.items[0].snippet.thumbnails)
     
   }
 
@@ -59,7 +56,7 @@ function Watching() {
 
           <Accordion.Item eventKey='1'>
             <Accordion.Header>Commments</Accordion.Header>
-            <Accordion.Body><Comment comments={comments} /></Accordion.Body>
+            <Accordion.Body><Comment videoId={videoID} /></Accordion.Body>
           </Accordion.Item>
 
         </Accordion>      
