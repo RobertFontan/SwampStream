@@ -9,7 +9,7 @@ function NotesSidebar({videoId}) {
 
   // get from supabase if notes exist
 
-  console.log('vidid', videoId)
+  //console.log('vidid', videoId)
   const [notes, setNotes] = useState(null)
 
   useEffect(() => {
@@ -21,7 +21,7 @@ function NotesSidebar({videoId}) {
       .single()
 
       if (data) {
-        console.log('notedata', data)
+        c//onsole.log('notedata', data)
         setNotes(data.Notes)
       }
     } 
