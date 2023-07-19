@@ -2,6 +2,8 @@ import React from 'react'
 import Video from './Video'
 import { useEffect, useState } from 'react'
 
+import { Spinner } from 'react-bootstrap'
+
 import axios from 'axios'
 
 function Course({course}) {
@@ -26,6 +28,22 @@ function Course({course}) {
     fetchData()
   }, [])
   
+  // if(videos == null){
+  //   return(
+  //     <Spinner animation="border" role="status">
+  //       <span >Loading...</span>
+  //     </Spinner>
+  //   )
+    
+  // }
+
+  if (!videos){
+    return(
+      <div>
+        <Spinner animation="border" role="status"></Spinner>
+      </div>
+    )
+  }
   return (
     <>
     {videos && <div className='course'>
