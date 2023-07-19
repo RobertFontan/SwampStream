@@ -67,7 +67,6 @@
 
 /* Home */
 .home{
-  display: flex;
   justify-content: last baseline;
 }
 
@@ -82,6 +81,7 @@
 .home .right-screen{
   display: flex;
   justify-content:center;
+  align-items: center;
   margin-top: 20px;
 }
 
@@ -163,23 +163,35 @@
 /* Watching */
 
 .watching {
- display: flex;
  justify-content: space-between; 
  gap: 5px;
  height: 100%;
  /* width: 100%; */
 }
 
+.watching .right-screen{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.watching .right-screen .button-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
 .sidebar{
   width: 400px;
   margin-top: 20px;
-  margin-right: 50px;
   border-radius: 10px;
   padding: 15px;
   background-color: lightgray;
   height: 500px;
   overflow: scroll;
 }
+
 
 .comments{
   margin-top: 20px;
