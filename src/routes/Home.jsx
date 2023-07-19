@@ -24,14 +24,14 @@ function Home() {
     <>
     <Container fluid className='home'>
         <Row>
-          <Col sm={2} className='navbar-container'>
+          <Col lg={2}>
             <Navbar/>
           </Col>
-          <Col sm={8} className='left-screen'>
+          <Col lg={8} className='left-screen'>
             <h1>Lectures</h1>
             {courses.map(course => <Course course={course} />)}
           </Col>
-          <Col sm={2} className='right-screen'>
+          <Col lg={2} className='right-screen'>
             <Explore explore={explore}/>
           </Col>
         </Row>

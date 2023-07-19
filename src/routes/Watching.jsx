@@ -1,26 +1,31 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef} from 'react'
 import Youtube from 'react-youtube'
 
+/* Components */
 import Comment from '../components/Comment';
 import NavBar from '../components/Navbar';
+import NotesSidebar from '../components/NotesSidebar';
+import Transcript from '../components/Transcript';
+import DownloadComponent from '../components/DownloadComponent';
+
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
 /* Bootstrap */
-import {Container, Row, Col, Accordion} from 'react-bootstrap';
+import {Container, Row, Col, Accordion,  Button} from 'react-bootstrap';
 
-import NotesSidebar from '../components/NotesSidebar';
-import Transcript from '../components/Transcript';
 
-import Button from 'react-bootstrap/Button'
+
 function Watching() {
   // what should happen when watching is clicked ? 
 
   const {videoID} = useParams()
   const [description, setDescription] = useState(null)
   const [title, setTitle] = useState(null)
+  const [sidebar, setSidebar] = useState("notes")
+  
 
-  const [sidebar, setSidebar] = useState("transcript") // 0 is transcript, 1 is notes
+  
   
   const opts = {
     height: '390',
@@ -35,9 +40,13 @@ function Watching() {
 
   const fetchData = async () => {
     const response = await axios.get(fetchURL)
+    
+    
     setTitle(response.data.items[0].snippet.title)
     setDescription(response.data.items[0].snippet.description)
     
+    console.log('watching',response.data)
+
   }
 
   useEffect(() => {
@@ -49,7 +58,7 @@ function Watching() {
     setSidebar(component);
   };
 
-  return (
+  return (  
     <>
     <Container fluid className='watching'>
       <Row>
@@ -57,9 +66,16 @@ function Watching() {
         <NavBar/>
       </Col>
       <Col lg={6} className="left-screen">
-        <div className="video-player"><Youtube videoId={videoID} opts={opts} onReady={(e) => e.target.pauseVideo()} /></div>
+        
+        <div className="video-player">
+          <div className="header">
+            <h6>{title}</h6>
+            <DownloadComponent />
+          </div>
+          <Youtube videoId={videoID} opts={opts} onReady={(e) => e.target.pauseVideo()} />
+        </div>
+        
         <Accordion>
-
           <Accordion.Item eventKey='0'>
             <Accordion.Header>Description</Accordion.Header>
             <Accordion.Body>{description && <div id="description">{description}</div>}</Accordion.Body>
@@ -72,7 +88,7 @@ function Watching() {
 
         </Accordion>      
       </Col>
-      <Col className='right-screen'>
+      <Col lg={2} className='right-screen'>
         <Button onClick={()=> handleClick("notes")}>Notes</Button><Button onClick={() => handleClick("transcript")}>Transcript</Button>
         <div className="sidebar">
           {sidebar === "transcript" ? <Transcript videoId={videoID}/>: <NotesSidebar title={title} videoId={videoID} />}
