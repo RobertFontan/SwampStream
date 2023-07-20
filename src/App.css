@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200&display=swap');#root {
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400&display=swap');#root {
   margin: 0;
 }
 
@@ -10,7 +10,6 @@
     transform: rotate(360deg);
   }
 }
-
 @media (prefers-reduced-motion: no-preference) {
   a:nth-of-type(2) .logo {
     animation: logo-spin infinite 20s linear;
@@ -37,13 +36,10 @@
   flex-direction: column;
   text-align: left;
   align-items: center;
-  width: 20vw;
-  float: left;
-  padding: 0px;
-  margin-right: 10px;
+  padding-right: 20px;
   background-color: var(--secondary-background);
   border-right: 1px solid lightgray;
-  height: 100vh;
+  height: 120vh;
 }
 
 .nav h3{
@@ -54,10 +50,13 @@
 .nav a {
   text-align: left;
   padding: 5px;
-  width: inherit;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  border-top: 0.5px solid black;
+  padding-left: 15px;
+  width: 15vw;
+  margin: 10px 0px 10px 10px;
+}
+.nav .active{
+  background-color: darkgray;
+  font-weight: bold;
 }
 
 
@@ -71,11 +70,13 @@
 
 .home h1 {
   font-weight: 200;
+  margin-bottom: 20px;
 }
 .home .left-screen{
   display: flex;
   flex-direction: column;
   margin-top: 20px;
+  padding-right: 30px;
 }
 .home .right-screen{
   display: flex;
@@ -87,21 +88,25 @@
 
 .explore{
   text-align: center;
-  h1{
-    margin-bottom: 25px;
-    font-weight: 100;
-  }
+  align-items: center;
+}
+.explore h1{
+  margin-bottom: 25px;
+  font-weight: 100;
 }
 .explore .explore-videos{
     color: black;
     align-items: center;
     background-color: #FBFBFB;
-    padding: 25px;
-    margin-right: 20px;
+    width: 175px;
+    padding: 10px;
     border-radius: 15px;
     border: 1px solid lightgray;
-    box-shadow: 5px;
   }
+.explore .video img{
+  height: 60px;
+  width: 100px;
+}
 /* Course */
 
 .course {
@@ -125,15 +130,10 @@
   height: 200px;
   width: 200px;
   
-  img{
-    border-radius: 10px;
-  }
-  /* display: inline-block;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  text-decoration: none; */
-
+}
+.video img{
+  border: 1px solid gray;
+  border-radius: 5px;
 }
 
 .video p:hover {

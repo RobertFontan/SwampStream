@@ -16,13 +16,9 @@ function Home() {
   //const playlistID = "PLoROMvodv4rMyupDF2O00r19JsmolyXdD" // depending on course 
  // const API_KEY = "AIzaSyCIFWHUm93iCiFfytTQGPtu-MzyXoUrIAY"
   
-
-
-
-
   return (  
     <>
-    <Container fluid className='home'>
+    <Container fluid="xs" className='home'>
         <Row>
           <Col sm={2} className='navbar-container'>
             <Navbar/>
