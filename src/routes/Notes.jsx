@@ -36,9 +36,7 @@ function Notes() {
 
     <div className = "notes">
       {/* {notes && } */}
-      <h1>
-        Notes
-      </h1>
+      <h1>Notes</h1>
       <div>
         <Tab.Container defaultActiveKey="first">
           <Row>
