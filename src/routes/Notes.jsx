@@ -1,5 +1,9 @@
 import React, {useState, useEffect} from 'react'
 import './Notes.css'
+import Col from 'react-bootstrap/Col';
+import Nav from 'react-bootstrap/Nav';
+import Row from 'react-bootstrap/Row';
+import Tab from 'react-bootstrap/Tab';
 
 
 import supabase from '../config/supabaseClient'
@@ -34,7 +38,6 @@ function Notes() {
     <div className = "notes">
       {notes && 
       <div>
-        Notes hello
 
         <Tab.Container id="left-tabs-example" defaultActiveKey="first">
           <Row className="clearfix">
