@@ -2,3 +2,7 @@ h1 {
     font-weight: 200;
     margin-bottom: 20px;
 }
+
+.notes .nav .active {
+    background-color: #EFEFEF;
+}
