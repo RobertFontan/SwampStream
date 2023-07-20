@@ -6,7 +6,7 @@ function Explore({explore}) {
     <div className='explore'>
         <h2>Explore</h2>
         <div className='explore-videos'>
-          {explore && explore.map(vid => <Video video={vid} />)}
+          {explore && explore.map(vid => <Video className='video' video={vid} />)}
         </div>
     </div>
   )

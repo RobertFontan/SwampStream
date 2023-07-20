@@ -84,7 +84,10 @@ function Watching() {
           </Accordion>      
         </Col>
         <Col  className='right-screen'>
-          <div className="button-container"><Button onClick={()=> handleClick("notes")}>Notes</Button><Button onClick={() => handleClick("transcript")}>Transcript</Button></div>
+          <div className="button-container">
+            <Button className={sidebar === "notes" ? "active": ""} onClick={()=> handleClick("notes")}>Notes</Button>
+            <Button className={sidebar === "transcript" ? "active": ""} onClick={() => handleClick("transcript")}>Transcript</Button>
+          </div>
           <div className="sidebar">
             {sidebar === "transcript" ? <Transcript videoId={videoID}/>: <NotesSidebar title={title} videoId={videoID} />}
           </div>
