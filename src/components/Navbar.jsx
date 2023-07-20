@@ -1,18 +1,25 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { useState, useEffect } from 'react';
+import { NavLink, useLocation} from 'react-router-dom'
 
 import Navbar from 'react-bootstrap/Navbar';
-import { NavbarBrand } from 'react-bootstrap';
-function NavBar(){
 
+function NavBar(){
+    const location = useLocation();
+    const { pathname } = location;
+    const splitLocation = pathname.split("/");
+
+    useEffect(() => {
+
+    }, [location])
     return(
         <Navbar className='nav'>
             <Navbar.Brand>SwampStream</Navbar.Brand>
-            <Link to="/"> Home </Link>
-            <Link to="/watching">Watching</Link>
-            <Link to="/notes">Notes</Link>
-            <Link to="/saved">Saved Videos</Link>
-            <Link to="/history">History</Link>
+            <NavLink className={splitLocation[1] === "home" ? "active" : ""} to="/"> HOME </NavLink>
+            <NavLink className={splitLocation[1].indexOf("watching") != -1 ? "active" : ""} to="/watching">WATCHING</NavLink>
+            <NavLink className={splitLocation[1] === "notes" ? "active" : ""} to="/notes">NOTES</NavLink>
+            <NavLink className={splitLocation[1] === "saved" ? "active" : ""} to="/saved">SAVED VIDEOS</NavLink>
+            <NavLink className={splitLocation[1] === "history" ? "active" : ""} to="/history">HISTORY</NavLink>
         </Navbar>
     )
 
