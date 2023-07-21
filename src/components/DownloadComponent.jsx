@@ -4,6 +4,8 @@ import React, {useState, useEffect, useRef } from 'react'
 
 import supabase from '../config/supabaseClient';
 
+import { Download } from 'react-bootstrap-icons';
+
 import {Button, Overlay, ListGroup, Offcanvas} from 'react-bootstrap'
 import axios from 'axios';
 
@@ -22,6 +24,7 @@ function DownloadComponent({videoId}) {
   /* Download Logic */
   const [fileType, setFileType] = useState(null)
   const [result, setResult] = useState(null)
+  const [transcript, setTranscript] = useState(null) 
 
   const fetchAudioData = async () => {
     const options = {
@@ -41,7 +44,6 @@ function DownloadComponent({videoId}) {
     setResult(response.data.link)
     handleOffShow()
   }
-  //         {urlResult ? <a target='_blank' rel="noreferrer" href={urlResult} className="download_btn">Download MP3</a> : ''}
 
   const fetchVideoData = async () => {
     // console.log('videodata videoid', videoId)
@@ -56,7 +58,9 @@ function DownloadComponent({videoId}) {
     // };
     // const response = await axios.request(options);
     // console.log(response.data.link)
-
+    setResult(null)
+    setTranscript("not working")
+    handleOffShow()
     console.log('not working')
   }
 
@@ -70,7 +74,8 @@ function DownloadComponent({videoId}) {
     console.log('dtData', data)
     if(data){
       console.log('dData', data.transcript)
-      setResult(data.transcript)
+      setResult(null)
+      setTranscript(data.transcript)
       handleOffShow()
     }
     if(error){
@@ -100,8 +105,8 @@ function DownloadComponent({videoId}) {
   
   return (
     <div>
-        <Button variant="danger" ref={target} onClick={() => setShow(!show)}>Download</Button>
-      <Overlay target={target.current} show={show} placement="right">
+      <Download className='pointer' ref={target} onClick={() => setShow(!show)}>Download</Download>
+      <Overlay target={target.current} show={show} placement="bottom">
         {({
           placement: _placement,
           arrowProps: _arrowProps,
@@ -113,15 +118,15 @@ function DownloadComponent({videoId}) {
           <ListGroup {...props}
           style={{
             position: 'absolute',
-            backgroundColor: 'rgba(255, 100, 100, 0.85)',
+            // backgroundColor: 'rgba(255, 100, 100, 0.85)',
             padding: '2px 10px',
             color: 'white',
             borderRadius: 3,
             ...props.style,
           }}>
-            <ListGroup.Item onClick={handleDownload} id='mp4'>Video</ListGroup.Item>
-            <ListGroup.Item onClick={handleDownload} id='mp3'>Audio</ListGroup.Item>
-            <ListGroup.Item onClick={handleDownload} id='text'>Transcript</ListGroup.Item>
+            <ListGroup.Item className='pointer' onClick={handleDownload} id='mp4'>Video</ListGroup.Item>
+            <ListGroup.Item className='pointer' onClick={handleDownload} id='mp3'>Audio</ListGroup.Item>
+            <ListGroup.Item className='pointer' onClick={handleDownload} id='text'>Transcript</ListGroup.Item>
           </ListGroup>
         )}
       </Overlay>
@@ -131,8 +136,7 @@ function DownloadComponent({videoId}) {
           <Offcanvas.Title></Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          {result}
-          {/* {result ? <a target='_blank' rel="noreferrer" href={result} className="download_btn">{fileType} Download Ready </a> : <p>error</p>} */}
+          {result ? <Button target='_blank' rel="noreferrer" href={result} className="download-btn">{fileType} Download Ready </Button> : <p>{transcript}</p>}
         </Offcanvas.Body>
       </Offcanvas>
 

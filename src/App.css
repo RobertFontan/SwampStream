@@ -234,3 +234,8 @@
 .notes nav {
   background-color: white;
 }
+
+
+.pointer{
+  cursor: pointer;
+}
