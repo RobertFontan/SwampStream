@@ -24,7 +24,6 @@ function Watching() {
   const [title, setTitle] = useState(null)
   const [sidebar, setSidebar] = useState("notes")
   
-
   
   
   const opts = {
@@ -45,7 +44,6 @@ function Watching() {
     setTitle(response.data.items[0].snippet.title)
     setDescription(response.data.items[0].snippet.description)
     
-    console.log('watching',response.data)
 
   }
 
@@ -62,43 +60,38 @@ function Watching() {
     <>
     <Container fluid className='watching'>
       <Row>
-      <Col lg={2}>
-        <NavBar/>
-      </Col>
       <Col lg={6} className="left-screen">
         
         <div className="video-player">
           <div className="header">
             <h6>{title}</h6>
-            <DownloadComponent videoId={videoID}/>
+            <DownloadComponent videoId={videoID} />
           </div>
           <Youtube videoId={videoID} opts={opts} onReady={(e) => e.target.pauseVideo()} />
         </div>
         
-        <Accordion>
+        <Accordion flush>
           <Accordion.Item eventKey='0'>
             <Accordion.Header>Description</Accordion.Header>
             <Accordion.Body>{description && <div id="description">{description}</div>}</Accordion.Body>
           </Accordion.Item>
 
-          <Accordion.Item eventKey='1'>
-            <Accordion.Header>Commments</Accordion.Header>
-            <Accordion.Body><Comment videoId={videoID} /></Accordion.Body>
-          </Accordion.Item>
+            <Accordion.Item eventKey='1'>
+              <Accordion.Header>Commments</Accordion.Header>
+              <Accordion.Body><Comment videoId={videoID} /></Accordion.Body>
+            </Accordion.Item>
 
-        </Accordion>      
-      </Col>
-      <Col lg={2} className='right-screen'>
-        <Button onClick={()=> handleClick("notes")}>Notes</Button><Button onClick={() => handleClick("transcript")}>Transcript</Button>
-        <div className="sidebar">
-          {sidebar === "transcript" ? <Transcript videoId={videoID}/>: <NotesSidebar title={title} videoId={videoID} />}
-        </div>
-      </Col>
-
-      {/* <VideoPlayer />
-      <Comments />
-      <SideBar /> */}
-      
+          </Accordion>      
+        </Col>
+        <Col  className='right-screen'>
+          <div className="button-container">
+            <Button className={sidebar === "notes" ? "active": ""} onClick={()=> handleClick("notes")}>Notes</Button>
+            <Button className={sidebar === "transcript" ? "active": ""} onClick={() => handleClick("transcript")}>Transcript</Button>
+          </div>
+          <div className="sidebar">
+            {sidebar === "transcript" ? <Transcript videoId={videoID}/>: <NotesSidebar title={title} videoId={videoID} />}
+          </div>
+        </Col>
       </Row>
     </Container>
     </>
