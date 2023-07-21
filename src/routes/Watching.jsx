@@ -60,21 +60,21 @@ function Watching() {
     <>
     <Container fluid className='watching'>
       <Row>
-        <Col className="left-screen">
-
-          <div className="video-player">
-            <div className="header">
-              <h6>{title}</h6>
-              <DownloadComponent />
-            </div>
-            <Youtube videoId={videoID} opts={opts} onReady={(e) => e.target.pauseVideo()} />
+      <Col lg={6} className="left-screen">
+        
+        <div className="video-player">
+          <div className="header">
+            <h6>{title}</h6>
+            <DownloadComponent videoId={videoID} />
           </div>
-
-          <Accordion flush>
-            <Accordion.Item eventKey='0'>
-              <Accordion.Header>Description</Accordion.Header>
-              <Accordion.Body>{description && <div id="description">{description}</div>}</Accordion.Body>
-            </Accordion.Item>
+          <Youtube videoId={videoID} opts={opts} onReady={(e) => e.target.pauseVideo()} />
+        </div>
+        
+        <Accordion flush>
+          <Accordion.Item eventKey='0'>
+            <Accordion.Header>Description</Accordion.Header>
+            <Accordion.Body>{description && <div id="description">{description}</div>}</Accordion.Body>
+          </Accordion.Item>
 
             <Accordion.Item eventKey='1'>
               <Accordion.Header>Commments</Accordion.Header>
