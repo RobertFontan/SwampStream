@@ -70,7 +70,7 @@ function Watching() {
         <div className="video-player">
           <div className="header">
             <h6>{title}</h6>
-            <DownloadComponent />
+            <DownloadComponent videoId={videoID}/>
           </div>
           <Youtube videoId={videoID} opts={opts} onReady={(e) => e.target.pauseVideo()} />
         </div>

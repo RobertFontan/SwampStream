@@ -2,22 +2,101 @@ import React, {useState, useEffect, useRef } from 'react'
 
 // import { Button, Overlay } from 'react-bootstrap'
 
-import {Button, Overlay, ListGroup} from 'react-bootstrap'
+import supabase from '../config/supabaseClient';
 
+import {Button, Overlay, ListGroup, Offcanvas} from 'react-bootstrap'
+import axios from 'axios';
 
-
-function DownloadComponent({videoID}) {
+function DownloadComponent({videoId}) {
+  console.log('videoId', videoId)
   /* List Group logic*/
   const [show, setShow] = useState(false);
   const target = useRef(null);
 
+  /* Offcanvas */
+  const [offShow, setOffShow] = useState(false)
+
+  const handleOffClose = () => setOffShow(false)
+  const handleOffShow = () => setOffShow(true)
+
   /* Download Logic */
-  const [fileType, setFileType] = useState('mp3')
+  const [fileType, setFileType] = useState(null)
+  const [result, setResult] = useState(null)
 
-  const videoURL = 'https://www.youtube.com/watch?v=' + videoID
-  const fetchURL = `https://convert2mp3s.com/api/button/${fileType}?url=${videoURL}`
+  const fetchAudioData = async () => {
+    const options = {
+      method: 'get',
+      url: 'https://youtube-mp36.p.rapidapi.com/dl',
+      headers: {
+        'X-RapidAPI-Key': '3bbf868d53msh78af357de335f9ap1536a6jsn20da07fcbe43',
+        'X-RapidAPI-Host': 'youtube-mp36.p.rapidapi.com'
+      },
+      params: {
+        id: videoId
+      }
+    }
+    const response = await axios.request(options);
 
-  //https://github.com/matthew-asuncion/Fast-YouTube-to-MP3-Converter-API
+    console.log(response.data);
+    setResult(response.data.link)
+    handleOffShow()
+  }
+  //         {urlResult ? <a target='_blank' rel="noreferrer" href={urlResult} className="download_btn">Download MP3</a> : ''}
+
+  const fetchVideoData = async () => {
+    // console.log('videodata videoid', videoId)
+    // const options = {
+    //   method: 'GET',
+    //   url: 'https://youtube-video-download-info.p.rapidapi.com/dl',
+    //   params: {id: videoId},
+    //   headers: {
+    //     'X-RapidAPI-Key': '3bbf868d53msh78af357de335f9ap1536a6jsn20da07fcbe43',
+    //     'X-RapidAPI-Host': 'youtube-video-download-info.p.rapidapi.com'
+    //   }
+    // };
+    // const response = await axios.request(options);
+    // console.log(response.data.link)
+
+    console.log('not working')
+  }
+
+  const fetchTranscriptData = async () => {
+    const { data, error } = await supabase
+    .from('Notes')
+    .select('transcript')
+    .eq('videoId', videoId)
+    .single()
+
+    console.log('dtData', data)
+    if(data){
+      console.log('dData', data.transcript)
+      setResult(data.transcript)
+      handleOffShow()
+    }
+    if(error){
+      console.error('err', error)
+    }
+  }
+  
+
+  const handleDownload = async (e) => {
+    console.log('download clicked')
+    const fileType = e.target.id
+    console.log('ftype',fileType)
+    if (fileType == 'mp3'){
+      fetchAudioData()
+    }
+    else if (fileType == 'mp4'){
+      fetchVideoData()
+    }
+    else if (fileType == 'text'){
+      fetchTranscriptData()
+    } 
+    else{
+      console.log('unknown', fileType)
+    }  
+  }
+
   
   return (
     <div>
@@ -40,12 +119,22 @@ function DownloadComponent({videoID}) {
             borderRadius: 3,
             ...props.style,
           }}>
-            <ListGroup.Item>Video</ListGroup.Item>
-            <ListGroup.Item>Audio</ListGroup.Item>
-            <ListGroup.Item>Transcript</ListGroup.Item>
+            <ListGroup.Item onClick={handleDownload} id='mp4'>Video</ListGroup.Item>
+            <ListGroup.Item onClick={handleDownload} id='mp3'>Audio</ListGroup.Item>
+            <ListGroup.Item onClick={handleDownload} id='text'>Transcript</ListGroup.Item>
           </ListGroup>
         )}
       </Overlay>
+
+      <Offcanvas show={offShow} onHide={handleOffClose}>
+        <Offcanvas.Header closeButton>
+          <Offcanvas.Title></Offcanvas.Title>
+        </Offcanvas.Header>
+        <Offcanvas.Body>
+          {result}
+          {/* {result ? <a target='_blank' rel="noreferrer" href={result} className="download_btn">{fileType} Download Ready </a> : <p>error</p>} */}
+        </Offcanvas.Body>
+      </Offcanvas>
 
     </div>
   )
