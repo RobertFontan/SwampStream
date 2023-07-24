@@ -20,6 +20,8 @@ function Watching() {
   // what should happen when watching is clicked ? 
 
   const {videoID} = useParams()
+
+  const [videoData, setVideoData] = useState(null)
   const [description, setDescription] = useState(null)
   const [title, setTitle] = useState(null)
   const [sidebar, setSidebar] = useState("notes")
@@ -40,9 +42,11 @@ function Watching() {
   const fetchData = async () => {
     const response = await axios.get(fetchURL)
     
-    
-    setTitle(response.data.items[0].snippet.title)
-    setDescription(response.data.items[0].snippet.description)
+    console.log('watching data', response.data.items[0])
+    setVideoData(response.data.items[0])
+
+    setTitle(videoData.snippet.title)
+    setDescription(videoData.snippet.description)
     
 
   }
@@ -55,6 +59,9 @@ function Watching() {
   const handleClick = (component) => {
     setSidebar(component);
   };
+
+  // maybe send to save data base
+  
 
   return (  
     <>
