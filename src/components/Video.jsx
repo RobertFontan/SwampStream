@@ -7,10 +7,10 @@ function Video({video}) {
 
   useEffect(() => {
     setVideoData(video.snippet)
-    console.log(videoData)
+    //console.log(videoData)
   }, [])
 
-  // for explore videos 
+  /* Explore, Saved Videos (anything in database) */
   if(!videoData){
     return (
       <Link to={"/watching/" + video.videoID}>

@@ -8,8 +8,13 @@ import NotesSidebar from '../components/NotesSidebar';
 import Transcript from '../components/Transcript';
 import DownloadComponent from '../components/DownloadComponent';
 
+/* Routing */
 import { useParams } from 'react-router-dom';
+
+/* API/Database */
 import axios from 'axios';
+
+import supabase from '../config/supabaseClient';
 
 /* Bootstrap */
 import {Container, Row, Col, Accordion,  Button} from 'react-bootstrap';
@@ -60,8 +65,25 @@ function Watching() {
     setSidebar(component);
   };
 
+  // send video object to database
+  const handleVideoSave = async () => {
+    
+    // this sends video to database 
+    const {data, error} = await supabase
+    .from('Saved')
+    .insert({ 'videoId': videoID, 'title': title, 'thumbnail': videoData.snippet.thumbnails.medium.url })
+    
+    if(data){
+      console.log(data)
+    }
+    if(error){
+      alert('Already saved (this will be updated :p)')
+      console.log('error', error)
+    }
+  }
+
   // maybe send to save data base
-  
+
 
   return (  
     <>
@@ -73,10 +95,11 @@ function Watching() {
           <div className="header">
             <h6>{title}</h6>
             <DownloadComponent videoId={videoID} />
+            <Button onClick={handleVideoSave}>Save Video</Button>
           </div>
           <Youtube videoId={videoID} opts={opts} onReady={(e) => e.target.pauseVideo()} />
         </div>
-        
+
         <Accordion flush>
           <Accordion.Item eventKey='0'>
             <Accordion.Header>Description</Accordion.Header>
