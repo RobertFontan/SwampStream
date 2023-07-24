@@ -31,9 +31,11 @@ function NotesSidebar({title ,videoId}) {
   
   }, [])
 
+  // inserting timestamp
 
 
 
+  
   
   // updates row if error insert row
   const handleSave = async () => {
@@ -49,6 +51,43 @@ function NotesSidebar({title ,videoId}) {
     }
   }
 
+  /* key press logic 
+
+  const [isCommand, setIsCommand] = useState(false)
+  const [command, setCommand] = useState('')
+
+  const handleKeyPress = async (e) => {
+    const keyPressed = e.key
+    console.log('key', keyPressed)
+
+    if(isCommand){
+      console.log('COMMAND')
+      if(keyPressed == ' '){
+        console.log('command ended', command)
+        setIsCommand(false)
+      }
+      else{
+        setCommand((prev) => prev + keyPressed)        
+      }
+    }
+    else if(keyPressed == '/'){
+      console.log('command init')
+      setIsCommand(true)
+      setCommand('')
+    }
+    
+  }
+
+  
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyPress);
+    // Don't forget to remove the event listener on component unmount
+    return () => {
+      window.removeEventListener('keydown', handleKeyPress);
+    };
+  }, []);
+*/
+  
 
   return (
     <div className='note-sidebar'>

@@ -56,6 +56,37 @@ function Watching() {
     setSidebar(component);
   };
 
+  // send video object to database
+  const handleVideoSave = async () => {
+    
+    // this sends video to database 
+    const {data, error} = await supabase
+    .from('Saved')
+    .insert({ 'videoId': videoID, 'title': title, 'thumbnail': videoData.snippet.thumbnails.medium.url })
+    
+    if(data){
+      console.log(data)
+    }
+    if(error){
+      alert('Already saved (this will be updated :p)')
+      console.log('error', error)
+    }
+  }
+
+  const playerRef = useRef()
+  const onReady = (e) =>{
+    playerRef.current = e.target
+  }
+
+  // maybe send to save data base
+  const timeStampClick = (seconds) =>{
+    
+    if(playerRef.current){
+      playerRef.current.seekTo(seconds)
+    }
+  }
+
+
   return (  
     <>
     <Container fluid className='watching'>
@@ -67,8 +98,11 @@ function Watching() {
             <h6>{title}</h6>
             <DownloadComponent videoId={videoID} />
           </div>
-          <Youtube videoId={videoID} opts={opts} onReady={(e) => e.target.pauseVideo()} />
+          <Youtube videoId={videoID} opts={opts} onReady={onReady} />
         </div>
+        
+        
+        <div>timestamps: <Button onClick={() => timeStampClick(60)}>60 secs</Button></div>
         
         <Accordion flush>
           <Accordion.Item eventKey='0'>
