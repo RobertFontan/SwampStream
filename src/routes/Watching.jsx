@@ -8,8 +8,13 @@ import NotesSidebar from '../components/NotesSidebar';
 import Transcript from '../components/Transcript';
 import DownloadComponent from '../components/DownloadComponent';
 
+/* Routing */
 import { useParams } from 'react-router-dom';
+
+/* API/Database */
 import axios from 'axios';
+
+import supabase from '../config/supabaseClient';
 
 /* Bootstrap */
 import {Container, Row, Col, Accordion,  Button} from 'react-bootstrap';
@@ -20,6 +25,8 @@ function Watching() {
   // what should happen when watching is clicked ? 
 
   const {videoID} = useParams()
+
+  const [videoData, setVideoData] = useState(null)
   const [description, setDescription] = useState(null)
   const [title, setTitle] = useState(null)
   const [sidebar, setSidebar] = useState("notes")
@@ -40,9 +47,11 @@ function Watching() {
   const fetchData = async () => {
     const response = await axios.get(fetchURL)
     
-    
-    setTitle(response.data.items[0].snippet.title)
-    setDescription(response.data.items[0].snippet.description)
+    console.log('watching data', response.data.items[0])
+    setVideoData(response.data.items[0])
+
+    setTitle(videoData.snippet.title)
+    setDescription(videoData.snippet.description)
     
 
   }
@@ -97,12 +106,10 @@ function Watching() {
           <div className="header">
             <h6>{title}</h6>
             <DownloadComponent videoId={videoID} />
+            <Button onClick={handleVideoSave}>Save Video</Button>
           </div>
           <Youtube videoId={videoID} opts={opts} onReady={onReady} />
         </div>
-        
-        
-        <div>timestamps: <Button onClick={() => timeStampClick(60)}>60 secs</Button></div>
         
         <Accordion flush>
           <Accordion.Item eventKey='0'>
