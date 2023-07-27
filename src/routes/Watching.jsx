@@ -7,6 +7,7 @@ import NavBar from '../components/Navbar';
 import NotesSidebar from '../components/NotesSidebar';
 import Transcript from '../components/Transcript';
 import DownloadComponent from '../components/DownloadComponent';
+import SaveButton from '../components/SaveButton';
 
 /* Routing */
 import { useParams } from 'react-router-dom';
@@ -118,7 +119,7 @@ function Watching() {
           <div className="header">
             <h6>{title}</h6>
             <DownloadComponent videoId={videoID} />
-            <Button onClick={handleVideoSave}>Save Video</Button>
+            <SaveButton title={title} videoID={videoID} videoData={videoData}/>
           </div>
           <Youtube videoId={videoID} opts={opts} onReady={onReady} />
         </div>        
