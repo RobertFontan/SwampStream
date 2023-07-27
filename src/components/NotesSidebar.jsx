@@ -6,22 +6,25 @@ import supabase from '../config/supabaseClient'
 function NotesSidebar({pRef ,title ,videoId}) {
   const [data, setData] = useState(null)
   const [notes, setNotes] = useState(null)
-  const [timestamps, setTimestamps] = useState([]) // get from db?
+  const [timestamps, setTimestamps] = useState(null) // get from db?
 
   // getting notes && timestamps
   useEffect(() => {
     const fetchData = async () =>{
       const { data, error } = await supabase
       .from('Notes')
-      .select('Notes, timestamps')
+      .select('Notes, Timestamps')
       .eq('videoId', videoId)
       .single()
+      if(error){
+        console.log('initRender', error)
+      }
 
-      if (data) {
-        console.log('notedata', data)
+      if (data) { 
+        console.log('notedata', data.Timestamps)
         setData(data)
         setNotes(data.Notes)
-        setTimestamps(data.timestamps)
+        setTimestamps(data.Timestamps)
       }
     } 
     fetchData()
@@ -31,8 +34,14 @@ function NotesSidebar({pRef ,title ,videoId}) {
   const handleSave = async () => {
     const {data, error} = await supabase
     .from('Notes')
-    .update({'Notes': notes})
+    .update({Notes: notes, Timestamps: timestamps})
     .eq('videoId', videoId)
+    if(data){
+      console.log('handlesave', data)
+    }
+    if(error){
+      console.log('handleSaveErr', error)
+    }
 
     if(error == null){
       const { error } = await supabase
@@ -53,29 +62,23 @@ function NotesSidebar({pRef ,title ,videoId}) {
     }
   }
 
-  useEffect(() => {
-    const handleTimeStampSave = async () => {
-      console.log('local timestamp', timestamps)
-  
-      const {data, error} = await supabase
-      .from('Notes')
-      .update({timestamps})
-      .eq('videoId', videoId)
-  
-      console.log('d timestamp', data)
-      console.log('e timestamp', error)
+  // const handleTimeStampSave = async () => {
+  //   console.log('local timestamp', timestamps)
+  //   const {data, error} = await supabase
+  //   .from('Notes')
+  //   .update({Timestamps: timestamps})
+  //   .eq('videoId', videoId)
+  //   .select()
 
-      // if(error == null){
-      //   const { error } = await supabase
-      //   .from('Notes')
-      //   .insert({ 'timestamps': timestamps })
-      // }
-    }
-    handleTimeStampSave()
+  //   console.log('d timestamp', data)
+  //   console.log('e timestamp', error)
 
-  }, [timestamps])
-
-  
+  //   // if(error == null){
+  //   //   const { error } = await supabase
+  //   //   .from('Notes')
+  //   //   .insert({ 'timestamps': timestamps })
+  //   // }
+  // }
 
   // on submit
   const handleSubmit = (e) => {
@@ -83,13 +86,20 @@ function NotesSidebar({pRef ,title ,videoId}) {
     const newDisplay = display
     const newSeconds = pRef.current.getCurrentTime()
     const newTS = {display: newDisplay, seconds: newSeconds}
-    setTimestamps((prev) => [...prev, newTS])
+
+    if(timestamps == null){
+      // setting initial timestamp
+      setTimestamps([newTS])
+    }
+    else{
+      setTimestamps((prev) => [...prev, newTS])
+    }
+
+    //handleTimeStampSave()
 
     setShow(false)
     setDisplay('')
   }
-
-
 
   const handleShow = () =>{
     setShow(true)
@@ -114,9 +124,6 @@ function NotesSidebar({pRef ,title ,videoId}) {
     return ret;
   }
   
-
-
-
   return (
     <div className='note-sidebar'>
         <Button onClick={handleSave} variant="outline-primary" size="sm">Save</Button>
