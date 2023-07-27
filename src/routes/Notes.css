@@ -3,6 +3,11 @@ h1 {
     margin-bottom: 20px;
 }
 
+.notes .nav {
+    padding-right: 5px;
+    width: 15vw;
+}
+
 .notes .nav .active {
     background-color: #EFEFEF;
 }
