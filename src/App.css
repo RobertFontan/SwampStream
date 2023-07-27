@@ -54,18 +54,21 @@
 .nav a {
   text-align: left;
   padding: 5px;
-  padding-left: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 32px;
   width: 15vw;
-  margin: 10px 10px 10px 10px;
+  /*margin: 10px 10px 10px 10px;*/
   transition: 0.2s;
+  font-weight: 200;
 }
 .nav a:hover{
-  background-color: darkgray;
+  background-color: #EFEFEF;
   color: black;
 }
 .nav .active{
-  background-color: darkgray;
-  font-weight: bold;
+  background-color: #EFEFEF;
+  font-weight: normal;
 }
 
 
