@@ -11,5 +11,5 @@ export default [
     {
         title: 'COP4600 - Operating Systems',
         playlistID: 'PLBlnK6fEyqRiVhbXDGLXDk_OQAeuVcp2O'
-    }
+    },    
 ]

@@ -1,5 +1,8 @@
-.button {
-    color: white;
-    background-color: white;
-    margin: 50px;
+h1 {
+    font-weight: 200;
+    margin-bottom: 20px;
+}
+
+.notes .nav .active {
+    background-color: #EFEFEF;
 }
