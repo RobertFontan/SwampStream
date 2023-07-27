@@ -45,13 +45,23 @@ function Watching() {
   const fetchURL = `https://youtube.googleapis.com/youtube/v3/videos?part=snippet&id=${videoID}&key=${API_KEY}`
 
   const fetchData = async () => {
-    const response = await axios.get(fetchURL)
+    const {data, error} = await axios.get(fetchURL)
+    console.log('made it here')
+    if(data){
+      console.log('watching data', data.items[0].snippet)
+      setVideoData(data.items[0].snippet)
+      setTitle(data.items[0].snippet.title)
+      setDescription(data.items[0].snippet.description)
+    }
+    if(error){
+      console.log('watching error', error)
+    }
     
-    console.log('watching data', response.data.items[0])
-    setVideoData(response.data.items[0])
+    // console.log('watching data', response.data.items[0])
+    // setVideoData(response.data.items[0])
 
-    setTitle(videoData.snippet.title)
-    setDescription(videoData.snippet.description)
+    // setTitle(videoData.snippet.title)
+    // setDescription(videoData.snippet.description)
     
 
   }
@@ -71,7 +81,7 @@ function Watching() {
     // this sends video to database 
     const {data, error} = await supabase
     .from('Saved')
-    .insert({ 'videoId': videoID, 'title': title, 'thumbnail': videoData.snippet.thumbnails.medium.url })
+    .insert({ 'videoId': videoID, 'title': title, 'thumbnail': videoData.thumbnails.medium.url })
     
     if(data){
       console.log(data)
@@ -82,7 +92,20 @@ function Watching() {
     }
   }
 
+  /* TIMESTAMP */
+
+  const playerRef = useRef()
+  const onReady = (e) =>{
+    playerRef.current = e.target
+  }
+
   // maybe send to save data base
+  const timeStampClick = (seconds) =>{
+    
+    if(playerRef.current){
+      playerRef.current.seekTo(seconds)
+    }
+  }
 
 
   return (  
@@ -97,9 +120,8 @@ function Watching() {
             <DownloadComponent videoId={videoID} />
             <Button onClick={handleVideoSave}>Save Video</Button>
           </div>
-          <Youtube videoId={videoID} opts={opts} onReady={(e) => e.target.pauseVideo()} />
-        </div>
-
+          <Youtube videoId={videoID} opts={opts} onReady={onReady} />
+        </div>        
         <Accordion flush>
           <Accordion.Item eventKey='0'>
             <Accordion.Header>Description</Accordion.Header>
@@ -119,7 +141,7 @@ function Watching() {
             <Button className={sidebar === "transcript" ? "active": ""} onClick={() => handleClick("transcript")}>Transcript</Button>
           </div>
           <div className="sidebar">
-            {sidebar === "transcript" ? <Transcript videoId={videoID}/>: <NotesSidebar title={title} videoId={videoID} />}
+            {sidebar === "transcript" ? <Transcript videoId={videoID}/>: <NotesSidebar pRef={playerRef}title={title} videoId={videoID} />}
           </div>
         </Col>
       </Row>
