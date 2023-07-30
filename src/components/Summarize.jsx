@@ -11,20 +11,29 @@ function Summarize() {
 
     /* Counting Input Tokens */
 
-    // function countTokens(text) {
-    //   return tiktoken.count(text).then(result => result.total_tokens);
-    // }
-
-    // const [inputToken, setInputToken] = useState(0)
-
-    // useEffect(() => {
-    //   countTokens(text).then(tokens => setInputToken(tokens));
-    // }, [text]);
+    function countTokens(text) {
+      // This is a very simplified approximation and might not always be correct.
+      // The actual tokenization algorithm used by OpenAI may produce different results.
+  
+      // Replace all multiple spaces, tabs, newlines, etc. with a single space
+      text = text.replace(/\s\s+/g, ' ');
+  
+      // Split the text by space (approximating words as tokens)
+      const words = text.split(' ');
+  
+      let tokens = 0;
+      words.forEach(word => {
+          // Each word is a token, unless it's more than one byte, then each byte is a token
+          tokens += Math.max(1, encodeURI(word).split(/%..|./).length - 1);
+      });
+  
+      return tokens;
+  }
 
     // counting output tokens
     function calculateMaxTokens(number, option) {
       const averageTokensPerSentence = 15; // Adjust this value based on your model and typical sentence length
-      const averageTokensPerParagraph = 100; // Adjust this value based on your model and typical paragraph length
+      const averageTokensPerParagraph = 100; // Adjust this value based ohttp://localhost:5173/ your model and typical paragraph length
 
       if (option === 'sentences') {
         return number * averageTokensPerSentence;
@@ -59,7 +68,7 @@ function Summarize() {
         ],
 
         temperature: 0, // 0(consistent) - 1(creative)
-        max_tokens: calculateMaxTokens(numb, option), 
+        max_tokens: calculateMaxTokens(numb, option) + 1000, 
         frequency_penalty: 0, // -2 -2(penalize frequency of tokens)
         presence_penalty: 0, // -2 - 2(penalize old topics)
       });
@@ -84,10 +93,10 @@ function Summarize() {
               <Dropdown.Item onClick={() => setOption('sentence(s)')}>sentence(s)</Dropdown.Item>
             </DropdownButton>
           </InputGroup>
-          <Button variant='success' onClick={handleGpt()}>+</Button>
+          {/* <Button variant='success' onClick={handleGpt()}>+</Button> */}
         </div>
         <textarea value={text} rows='4' cols='50' onChange={(e) => setText(e.target.value)}/>
-        <p>Token Count: {inputToken} </p>
+        <p>Estimated Tokens: {countTokens(text)}</p>
     </div>
   ) 
 }
