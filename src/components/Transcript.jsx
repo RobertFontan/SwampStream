@@ -52,7 +52,7 @@ function Transcript({videoId}) {
     .single()
     
     if (data) {
-      console.log('tdata', data)
+      //console.log('tdata', data)
       if(data.transcript == null){
         console.log('data is null')
         fetchTranscriptData()
@@ -89,58 +89,39 @@ function Transcript({videoId}) {
 
 
 
-  const fetchTranslation = async () => {
-    console.log("translation")
+  const fetchTranslation = async (lang) => {
+    console.log("translation from en to: ", lang.code)
+    const encodedParams = new URLSearchParams();
+    encodedParams.set('source', 'en'); // source lang
+    encodedParams.set('target', lang.code); // target lang
+    encodedParams.set('format', 'text')
+    encodedParams.set('q', transcript); // text
+
+    const options = {
+      method: 'POST',
+      url: 'https://rapid-translate-multi-traduction.p.rapidapi.com/t',
+      headers: {
+        'content-type': 'application/json',
+        'X-RapidAPI-Key': '3bbf868d53msh78af357de335f9ap1536a6jsn20da07fcbe43',
+        'X-RapidAPI-Host': 'rapid-translate-multi-traduction.p.rapidapi.com'
+      },
+      data: {
+        from: 'en',
+        to: lang.code,
+        q: transcript
+      }
+    };
     
-    if(lang.code == 'en'){
-      
-      console.log('english')
-      return;
-    }
-    else{
-      const encodedParams = new URLSearchParams();
-      encodedParams.set('source', 'en'); // source lang
-      encodedParams.set('target', lang.code); // target lang
-      encodedParams.set('format', 'text')
-      encodedParams.set('q', transcript); // text
-
-      const options = {
-        method: 'POST',
-        url: 'https://google-translate1.p.rapidapi.com/language/translate/v2',
-        headers: {
-          'content-type': 'application/x-www-form-urlencoded',
-          'Accept-Encoding': 'application/gzip',
-          'X-RapidAPI-Key': '3bbf868d53msh78af357de335f9ap1536a6jsn20da07fcbe43',
-          'X-RapidAPI-Host': 'google-translate1.p.rapidapi.com'
-        },
-        data: encodedParams
-      }
-      const {data, error} = await axios.request(options)
-      
-      if(data) {
-        console.log(data)
-        console.log(data.translations)
-        setTranscript(data.translations[0].translatedText)
-      }
-      if(error){
-        console.log(error)
-      }
-
-  
+    try {
+      const response = await axios.request(options);
+      console.log(response.data);
+      setNewTranscript(response.data[0])
+    } catch (error) {
+      console.error(error);
     }
   }
 
-  useEffect(()=>{
-
-    fetchTranslation()
-
-
-  }, [lang]) 
-
-  // if language is not english handle search
-  // if language is english language then dont call to api 
-  // maybe save to supabase 
-
+  const displayData = newTranscript ? newTranscript : transcript;
 
 
   if(!transcript){
@@ -158,11 +139,14 @@ function Transcript({videoId}) {
           {lang.name}
         </Dropdown.Toggle>
         <Dropdown.Menu>
-          {mappings.map((lang) => (<Dropdown.Item onClick={() => setLang(lang)}>{lang.name}</Dropdown.Item>))}
+          {mappings.map((lang) => (<Dropdown.Item onClick={() => {
+            setLang(lang)
+            fetchTranslation(lang)
+            }}>{lang.name}</Dropdown.Item>))}
         </Dropdown.Menu>
       </Dropdown>
     
-      {transcript && <p>{transcript}</p>}
+      {transcript && <p>{displayData}</p>}
     
     
     </div>
