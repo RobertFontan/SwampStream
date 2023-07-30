@@ -3,11 +3,11 @@ import Youtube from 'react-youtube'
 
 /* Components */
 import Comment from '../components/Comment';
-import NavBar from '../components/Navbar';
 import NotesSidebar from '../components/NotesSidebar';
 import Transcript from '../components/Transcript';
 import DownloadComponent from '../components/DownloadComponent';
 import SaveButton from '../components/SaveButton';
+import Summarize from '../components/Summarize';
 
 /* Routing */
 import { useParams } from 'react-router-dom';
@@ -143,6 +143,9 @@ function Watching() {
           </div>
           <div className="sidebar">
             {sidebar === "transcript" ? <Transcript videoId={videoID}/>: <NotesSidebar pRef={playerRef}title={title} videoId={videoID} />}
+          </div>
+          <div className="ai-container">
+            <Summarize />
           </div>
         </Col>
       </Row>
