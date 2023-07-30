@@ -3,6 +3,8 @@ import {YoutubeTranscript} from 'youtube-transcript'
 import { Spinner } from 'react-bootstrap'
 import supabase from '../config/supabaseClient'
 
+import {Dropdown} from 'react-bootstrap'
+
 import axios from 'axios'
 function Transcript({videoId}) {
   const [transcript, setTranscript] = useState(null)
@@ -30,7 +32,7 @@ function Transcript({videoId}) {
 
   }
 
-  const handleUpdate = async () => {
+   const handleUpdate = async () => {
     console.log('going to update')
     const {data, error} = await supabase
     .from('Notes')
@@ -39,8 +41,6 @@ function Transcript({videoId}) {
     if(data){
       console.log('update successful')
     }
-
-
   }
 
 
@@ -52,7 +52,7 @@ function Transcript({videoId}) {
     .single()
     
     if (data) {
-      console.log('tdata', data)
+      //console.log('tdata', data)
       if(data.transcript == null){
         console.log('data is null')
         fetchTranscriptData()
@@ -72,6 +72,57 @@ function Transcript({videoId}) {
     fetchDatabaseData() 
   }, [])
   
+  /* Language */
+
+
+  const mappings = [
+    {name: 'English',code: 'en'},
+    {name:'Spanish',code:'es'},
+    {name: 'Portuguese', code: 'pt'},
+    {name: 'Simplified Chinese', code: 'zh-CN'},
+    {name: 'French' , code:'fr'},
+    {name: 'Italian' ,code: 'it'}
+  ]
+
+  const [lang, setLang] = useState(mappings[0])
+  const [newTranscript, setNewTranscript] = useState(null)
+
+
+
+  const fetchTranslation = async (lang) => {
+    console.log("translation from en to: ", lang.code)
+    const encodedParams = new URLSearchParams();
+    encodedParams.set('source', 'en'); // source lang
+    encodedParams.set('target', lang.code); // target lang
+    encodedParams.set('format', 'text')
+    encodedParams.set('q', transcript); // text
+
+    const options = {
+      method: 'POST',
+      url: 'https://rapid-translate-multi-traduction.p.rapidapi.com/t',
+      headers: {
+        'content-type': 'application/json',
+        'X-RapidAPI-Key': '3bbf868d53msh78af357de335f9ap1536a6jsn20da07fcbe43',
+        'X-RapidAPI-Host': 'rapid-translate-multi-traduction.p.rapidapi.com'
+      },
+      data: {
+        from: 'en',
+        to: lang.code,
+        q: transcript
+      }
+    };
+    
+    try {
+      const response = await axios.request(options);
+      console.log(response.data);
+      setNewTranscript(response.data[0])
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  const displayData = newTranscript ? newTranscript : transcript;
+
 
   if(!transcript){
     return(
@@ -82,7 +133,23 @@ function Transcript({videoId}) {
   }
 
   return (
-    <div>{transcript && <p>{transcript}</p>}</div>
+    <div>
+       <Dropdown>
+        <Dropdown.Toggle variant="success" id="dropdown-basic">
+          {lang.name}
+        </Dropdown.Toggle>
+        <Dropdown.Menu>
+          {mappings.map((lang) => (<Dropdown.Item onClick={() => {
+            setLang(lang)
+            fetchTranslation(lang)
+            }}>{lang.name}</Dropdown.Item>))}
+        </Dropdown.Menu>
+      </Dropdown>
+    
+      {transcript && <p>{displayData}</p>}
+    
+    
+    </div>
   )
 }
 
