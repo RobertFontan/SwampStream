@@ -54,7 +54,43 @@ app.post('/generate-summary', async (req, res) => {
     res.status(500).send('Error generating summary');
   }
 });
-  
+
+
+app.post('/generate-list', async (req, res) => {
+  const userContent = req.body.userContent;
+  // const number = req.body.number;
+  // const option = req.body.option;
+
+  const systemMessage = `Make a bulleted list for the following content in ${number} bullets`;
+
+  try {
+    console.log('Inside /generate-list route, about to call OpenAI API');
+    const openaiResponse = await openai.createChatCompletion({
+      model: 'gpt-3.5-turbo',
+      messages: [
+        {
+          role: 'system',
+          content: systemMessage,
+        },
+        {
+          role: 'user',
+          content: userContent,
+        },
+      ],
+      temperature: 0,
+      max_tokens: 3000,
+      top_p: 1,
+      frequency_penalty: 0,
+      presence_penalty: 0,
+    });
+    console.log('received response from openai api', openaiResponse)
+    res.json({ summary: openaiResponse.data.choices[0].message.content });
+  } catch (err) {
+    console.error('Error inside /generate-list', err)
+    res.status(500).send('Error generating list');
+  }
+});
+
 
 app.listen(5000, () => {
   console.log('Server is running on port 5000');
