@@ -7,14 +7,14 @@ function Summarize() {
   const [option, setOption] = useState('paragraph(s)')
   const [numb, setNumb] = useState('1')
   const [summary, setSummary] = useState(null)
-  const { Configuration, OpenAIApi } = require("openai");
+  // const { Configuration, OpenAIApi } = require("openai");
 
-  const configuration = new Configuration({
-    apiKey: import.meta.env.VITE_OPENAI_KEY,
-  });
-  const openai = new OpenAIApi(configuration);
+  // const configuration = new Configuration({
+  //   apiKey: import.meta.env.VITE_OPENAI_KEY,
+  // });
+  // const openai = new OpenAIApi(configuration);
   
-  /* Counting Input Tokens */
+  // /* Counting Input Tokens */
   function countTokens(text) {
     // This is a very simplified approximation and might not always be correct.
     // The actual tokenization algorithm used by OpenAI may produce different results.
@@ -50,48 +50,16 @@ function Summarize() {
 
   const fetchData = async (e) => {
     e.preventDefault()
-    const {data, error} = await axios.post('/generate-summary', { userContent: content, number: num, option: opt })
- 
-    if(data){
-      console.log(data)
-      setSummary(data.data.summary)
+    console.log('fetchData summary', numb, option, text)
+    
+    try {
+      const response = await axios.post('http://localhost:5000/generate-summary', { userContent: text, number: numb, option: option })
+      console.log(response.data)
+      setSummary(response.data.summary)
+    } catch (error) {
+      console.error('ai summary error', error)
     }
-    if(error){
-      console.log('ai summ error', error)
-    }
-
   }
-
-  // const handleGpt = async (e) => {
-  //     e.preventDefault()
-  //     console.log('gpt called with', numb, option)
-
-  //     try {
-  //       const response = await openai.createChatCompletion({
-  //           model: "gpt-3.5-turbo",
-  //           messages: [
-  //             {
-  //               "role": "system",
-  //               "content": `Summarize content you are provided with in ${numb + " " + option}`
-  //             },
-  //             {
-  //               "role": "user",
-  //               "content": {text}
-  //             }
-  //           ],
-  //           temperature: 0, // 0(consistent) - 1(creative)
-  //           max_tokens: 3000,
-  //           top_p: 1, 
-  //           frequency_penalty: 0, // -2 -2(penalize frequency of tokens)
-  //           presence_penalty: 0, // -2 - 2(penalize old topics)
-  //       });
-  //       console.log(response)
-  //       setSummary(response.data.choices[0]?.text?.trim())
-  //     }
-  //     catch (error) {
-  //         console.log('ai error', error)
-  //     }
-  //   }
 
   return (
     <div>
