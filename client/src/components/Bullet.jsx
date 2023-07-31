@@ -30,10 +30,9 @@ function Bullet() {
       <Form onSubmit={fetchList}>
         <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
         <Form.Label>Make a Bulleted List from the following:</Form.Label>
-        <Button type='submit'>+</Button>
         {/* <Form.Control size='lg' value={numb} onChange={(e) => setNumb(e.target.value)}/> */}
         <Form.Control as="textarea" rows={3} value={text} onChange={(e)=>setText(e.target.value)}/>
-        <Button type='submit'>+</Button>
+        <Button type='submit'>Generate</Button>
         </Form.Group>
       </Form>
       <div className='list-container'>
