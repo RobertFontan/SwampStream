@@ -58,6 +58,7 @@ function Summarize() {
       setSummary(response.data.summary)
     } catch (error) {
       console.error('ai summary error', error)
+      setSummary('Error generating summary, try again later :>')
     }
   }
 

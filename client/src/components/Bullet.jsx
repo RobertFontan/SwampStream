@@ -12,11 +12,13 @@ function Bullet() {
     console.log('WE MADE IT!', text)
     
     try {
-      const response = await axios.post('http://localhost:5000/generate-list', { userContent: text, number: numb, option: option })
+      const response = await axios.post('http://localhost:5000/generate-list', { userContent: text })
       console.log(response.data)
       setListRes(response.data.summary)
     } catch (error) {
       console.error('ai list error', error)
+      setQuestionRes('Error Generating bullets, try again later :(')
+
     }
   
   
