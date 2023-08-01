@@ -48,7 +48,7 @@ function Course({course}) {
     <>
     {videos && <div className='course'>
         <h1>{course.title}</h1>
-        <div className="course-videos">{videos.filter((item, index) => index < 4).map(vid => <Video video={vid} />)}</div>
+        <div className="course-videos">{videos.filter((item, index) => index < 4).map(vid => <Video course={course.title.slice(0,7)} video={vid} />)}</div>
     </div>
     }
     </>
