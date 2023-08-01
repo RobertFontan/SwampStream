@@ -24,14 +24,17 @@ import {Container, Row, Col, Accordion,  Button} from 'react-bootstrap';
 function Watching() {
   // what should happen when watching is clicked ? 
 
-  const {videoID} = useParams()
+  const {course ,videoID} = useParams()
 
   const [videoData, setVideoData] = useState(null)
+
+
   const [description, setDescription] = useState(null)
   const [title, setTitle] = useState(null)
   const [sidebar, setSidebar] = useState("notes")
   
   
+  const [saveData, setSaveData] = useState([])
   
   const opts = {
     height: '390',
@@ -42,14 +45,20 @@ function Watching() {
   };
 
   const API_KEY = "AIzaSyCIFWHUm93iCiFfytTQGPtu-MzyXoUrIAY"
+  const newFetchURL = `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&id=${videoID}&key=${API_KEY}`
   const fetchURL = `https://youtube.googleapis.com/youtube/v3/videos?part=snippet&id=${videoID}&key=${API_KEY}`
 
   const fetchData = async () => {
-    const {data, error} = await axios.get(fetchURL)
+    const {data, error} = await axios.get(newFetchURL)
     console.log('made it here')
     if(data){
+      console.log('NEW', data)
       console.log('watching data', data.items[0].snippet)
+
+
       setVideoData(data.items[0].snippet)
+      setSaveData([data.items[0].contentDetails.duration, data.items[0].snippet.publishedAt, course])
+
       setTitle(data.items[0].snippet.title)
       setDescription(data.items[0].snippet.description)
     }
@@ -57,11 +66,7 @@ function Watching() {
       console.log('watching error', error)
     }
     
-    // console.log('watching data', response.data.items[0])
-    // setVideoData(response.data.items[0])
-
-    // setTitle(videoData.snippet.title)
-    // setDescription(videoData.snippet.description)
+    // get content duration, date (easy), course title (hard)
     
 
   }
@@ -101,7 +106,6 @@ function Watching() {
 
   // maybe send to save data base
   const timeStampClick = (seconds) =>{
-    
     if(playerRef.current){
       playerRef.current.seekTo(seconds)
     }
@@ -118,7 +122,7 @@ function Watching() {
           <div className="header">
             <h6>{title}</h6>
             <DownloadComponent videoId={videoID} />
-            <SaveButton title={title} videoID={videoID} videoData={videoData}/>
+            <SaveButton title={title} videoID={videoID} videoData={videoData} saveData={saveData} />
           </div>
           <Youtube videoId={videoID} opts={opts} onReady={onReady} />
         </div>        
