@@ -1,23 +1,31 @@
-import Tab from 'react-bootstrap/Tab';
-import Tabs from 'react-bootstrap/Tabs';
+import React, {useState, useEffect} from "react";
+import { Button } from "react-bootstrap";
 
-function Note() {
+import supabase from "../config/supabaseClient";
+
+function Note({videoID, data}) {
+  const [notes, setNotes] = useState(data)
+
+  const handleSave = async () => {
+    const {data, error} = await supabase
+    .from('Notes')
+    .update({Notes: notes})
+    .eq('videoId', videoID)
+    if(data){
+      console.log('handlesave', data)
+    }
+    if(error){
+      console.log('handleSaveErr', error)
+    }
+  } 
+
+
+
   return (
-    <Tabs
-      defaultActiveKey="profile"
-      id="uncontrolled-tab-example"
-      className="mb-3"
-    >
-      <Tab eventKey="home" title="Home">
-        Tab content for Home
-      </Tab>
-      <Tab eventKey="profile" title="Profile">
-        Tab content for Profile
-      </Tab>
-      <Tab eventKey="contact" title="Contact" disabled>
-        Tab content for Contact
-      </Tab>
-    </Tabs>
+    <div className='note'>
+      <Button onClick={handleSave}>Save</Button>
+        <textarea key={videoID} value={notes} rows='4' cols='50' onChange={(e) => setNotes(e.target.value)}/>
+    </div>
   );
 }
 

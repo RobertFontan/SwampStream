@@ -1,12 +1,8 @@
 import React, {useState, useEffect} from 'react'
 import './Notes.css'
-import Col from 'react-bootstrap/Col';
-import Nav from 'react-bootstrap/Nav';
-import Row from 'react-bootstrap/Row';
-import Tab from 'react-bootstrap/Tab';
-import Tabs from 'react-bootstrap/Tabs';
-import TabContainer from 'react-bootstrap/TabContainer'
+import {Col, Nav, Row, Tab} from 'react-bootstrap';
 
+import Note from '../components/Note';
 
 import supabase from '../config/supabaseClient'
 
@@ -20,11 +16,16 @@ function Notes() {
       
       const { data, error } = await supabase
       .from('Notes')
-      .select('*')
+      .select('Notes, title, videoId')
 
-      setNotes(data)
-      console.log('data', data)
 
+      if(data){
+        setNotes(data)
+        console.log('NOTES', data)
+      }
+      if(error){
+        console.log('NOTES ERROR', error)
+      }
     } 
     fetchData()
   
@@ -33,33 +34,37 @@ function Notes() {
 
 
   return (
-
-    <div className = "notes">
-      {/* {notes && } */}
+    <>
+    {notes && <div className = "notes">
       <h1>Notes</h1>
-      <div>
         <Tab.Container defaultActiveKey="first">
           <Row>
             <Col sm={2}>
               <Nav>
-                <Nav.Item>
-                  <Nav.Link eventKey="first">Tab 1</Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                  <Nav.Link eventKey="second">Tab 2</Nav.Link>
-                </Nav.Item>
+                { notes.map((e) => (
+                  <Nav.Item>
+                    <Nav.Link eventKey={e.videoId}>{e.title}</Nav.Link>
+                  </Nav.Item>))
+                }
               </Nav>
             </Col>
             <Col>
+
               <Tab.Content>
-                <Tab.Pane eventKey="first">First Tab Content</Tab.Pane>
-                <Tab.Pane eventKey="second">Second Tab Content</Tab.Pane>
+                {notes.map((e) => (
+                  <Tab.Pane eventKey={e.videoId}>
+                    <Note videoID={e.videoId} data={e.Notes} />
+                    
+                  </Tab.Pane>
+
+                ))}
               </Tab.Content>
+            
             </Col>
           </Row>
         </Tab.Container>
-      </div>
-    </div>
+    </div>}
+    </>
   )
 }
 
