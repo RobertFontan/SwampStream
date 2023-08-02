@@ -47,7 +47,7 @@ function SaveButton({title, videoID, videoData, saveData}) {
             const { data, error } = await supabase
             .from('Saved')
             .select('*')
-            .eq('videoId', videoID)
+            .eq('videoID', videoID)
 
             if (data) {
                 console.log('SAVE BUTTON', data)
@@ -71,7 +71,7 @@ function SaveButton({title, videoID, videoData, saveData}) {
     if (!saved) {
         const {data, error} = await supabase
         .from('Saved')
-        .insert({ 'videoId': videoID, 'title': title, 'thumbnail': videoData.thumbnails.medium.url, 'date': formatDate(saveData[1]), 'length': iso8601ToSeconds(saveData[0]), 'class': saveData[2]})
+        .insert({ 'videoID': videoID, 'title': title, 'thumbnail': videoData.thumbnails.medium.url, 'date': formatDate(saveData[1]), 'length': iso8601ToSeconds(saveData[0]), 'class': saveData[2]})
         console.log(data)
 
         if (data) {
@@ -92,7 +92,7 @@ function SaveButton({title, videoID, videoData, saveData}) {
         const { error } = await supabase
             .from('Saved')
             .delete()
-            .eq('videoId', videoID)
+            .eq('videoID', videoID)
             setSaved(false);
             console.log('Unsaved video.')
     }
