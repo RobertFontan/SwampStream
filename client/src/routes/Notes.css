@@ -6,3 +6,27 @@ h1 {
 .notes .nav .active {
     background-color: #EFEFEF;
 }
+
+.notes .nav-link {
+    color: black;
+}
+
+.notes .nav-link.active {
+    color: rgb(15, 3, 107);
+}
+
+.notes .nav-item {
+    width: 275px;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+.notes .nav-link {
+    width: 200px;
+    margin-right: 0px !important;
+}
+
+.nav-link {
+    width: 100% !important;
+    margin-right: 0px !important;
+}

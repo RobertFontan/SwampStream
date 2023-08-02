@@ -19,12 +19,12 @@ import supabase from '../config/supabaseClient';
 /* Bootstrap */
 import {Container, Row, Col, Accordion,  Button} from 'react-bootstrap';
 
-
+/* History */
 
 function Watching() {
-  // what should happen when watching is clicked ? 
-
   const {course ,videoID} = useParams()
+
+
 
   const [videoData, setVideoData] = useState(null)
 
@@ -67,8 +67,6 @@ function Watching() {
     }
     
     // get content duration, date (easy), course title (hard)
-    
-
   }
 
   useEffect(() => {

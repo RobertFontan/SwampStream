@@ -39,7 +39,7 @@ function Notes() {
       <h1>Notes</h1>
         <Tab.Container defaultActiveKey="first">
           <Row>
-            <Col sm={2}>
+            <Col sm={3}>
               <Nav>
                 { notes.map((e) => (
                   <Nav.Item>
