@@ -3,6 +3,35 @@ h1 {
     margin-bottom: 20px;
 }
 
+.notes .nav {
+    padding-right: 0px;
+}
+
 .notes .nav .active {
     background-color: #EFEFEF;
+}
+
+.notes .nav-link {
+    color: black;
+}
+
+.notes .nav-link.active {
+    color: rgb(15, 3, 107);
+}
+
+.notes .nav-item {
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+.notes .nav-link {
+    width: 100%;
+    margin-right: 0px !important;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.nav-link {
+    margin-right: 0px !important;
+    height: 80px;
 }
