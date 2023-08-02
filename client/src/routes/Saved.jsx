@@ -65,7 +65,7 @@ function Saved() {
       </Dropdown>
 
       <div className="saved-container">
-          {saved && saved.map((elementInArray) => <Video video={elementInArray}/>)}
+          {saved && saved.map((elementInArray) => <Video course={elementInArray.class} video={elementInArray}/>)}
       </div>
     </div>
   )

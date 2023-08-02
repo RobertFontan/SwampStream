@@ -31,6 +31,7 @@ function App() {
             <Col className="content">
               <Routes>
                    <Route path="/" element={<Home />}/>
+                   <Route path="/watching" element={<Watching />}/>
                    <Route path="/watching/:course/:videoID" element={<Watching />}/>
                    <Route path="/notes" element={<Notes />}/>
                    <Route path="/saved" element={<Saved />}/>
