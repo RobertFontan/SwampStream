@@ -23,8 +23,8 @@ function Note({videoID, data}) {
 
   return (
     <div className='note'>
-      <Button onClick={handleSave}>Save</Button>
-        <textarea key={videoID} value={notes} rows='4' cols='50' onChange={(e) => setNotes(e.target.value)}/>
+      <Button variant="dark" className="note-save" onClick={handleSave}>Save</Button>
+      <textarea key={videoID} value={notes} rows='4' cols='50' onChange={(e) => setNotes(e.target.value)}/>
     </div>
   );
 }

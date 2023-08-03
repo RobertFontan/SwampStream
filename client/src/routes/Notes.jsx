@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import './Notes.css'
+// import './Notes.css'
 import {Col, Nav, Row, Tab} from 'react-bootstrap';
 
 import Note from '../components/Note';
@@ -39,7 +39,7 @@ function Notes() {
       <h1>Notes</h1>
         <Tab.Container defaultActiveKey="first">
           <Row>
-            <Col sm={3}>
+            <Col className='nav-col' sm={3}>
               <Nav>
                 { notes.map((e) => (
                   <Nav.Item>
@@ -54,9 +54,7 @@ function Notes() {
                 {notes.map((e) => (
                   <Tab.Pane eventKey={e.videoId}>
                     <Note videoID={e.videoId} data={e.Notes} />
-                    
                   </Tab.Pane>
-
                 ))}
               </Tab.Content>
             
