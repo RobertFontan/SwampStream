@@ -131,6 +131,8 @@
 .course {
   display: flex;
   flex-direction: column;
+  width: 900px;
+  
 }
 
 .course h1 {
@@ -142,6 +144,10 @@
 .course-videos{
   display: flex;
   gap: 20px;
+  overflow: overlay;
+  /* width: 50%; */
+  /* overflow: scroll;
+  width: 50%; */
 }
 
 /* Video */

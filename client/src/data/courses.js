@@ -11,5 +11,9 @@ export default [
     {
         title: 'COP4600 - Operating Systems',
         playlistID: 'PLBlnK6fEyqRiVhbXDGLXDk_OQAeuVcp2O'
-    },    
+    },  
+    {
+        title: 'CAP 4641 - Natural Language Processing',
+        playlistID: 'PLQY2H8rRoyvzDbLUZkbudP-MFQZwNmU4S'
+    }
 ]
