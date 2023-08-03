@@ -25,10 +25,12 @@ function Saved() {
 
   // setting up filters
   const [filter, setFilter] = useState('date')
+  const [ascending, setAscending] = useState(false)
 
 
   const handleFilter = async () => {
-    if (filter == 'title') {
+    console.log('Sorting by' + filter)
+    if (ascending) {
       // depening on filter
       const {data , error} = await supabase
       .from('Saved')
@@ -64,7 +66,7 @@ function Saved() {
 
   useEffect(()=> {
     handleFilter()
-  }, [filter])
+  }, [filter, ascending])
   // everytime the filter changes it should be loading new information
 
 
@@ -76,14 +78,55 @@ function Saved() {
         <h5>Filter by</h5>
         <Dropdown.Toggle variant="secondary" >{filter}</Dropdown.Toggle>
         <Dropdown.Menu>
-          <Dropdown.Item onClick={() => setFilter('class')}>Class (a-z)</Dropdown.Item>
-          <Dropdown.Item onClick={() => setFilter('class')}>Class (z-a)</Dropdown.Item>
-          <Dropdown.Item onClick={() => setFilter('length')}>Length (shortest - longest)</Dropdown.Item>
-          <Dropdown.Item onClick={() => setFilter('length')}>Length (longest - shortest)</Dropdown.Item>
-          <Dropdown.Item onClick={() => setFilter('date')}>Date (earliest)</Dropdown.Item>
-          <Dropdown.Item onClick={() => setFilter('date')}>Date (latest)</Dropdown.Item>
-          <Dropdown.Item onClick={() => setFilter('title')}>Title (a-z)</Dropdown.Item>
-          <Dropdown.Item onClick={() => setFilter('title')}>Title (z-a)</Dropdown.Item>
+
+          <Dropdown.Item onClick={() => {
+            setFilter('class')
+            setAscending(true)}}>
+            Class (a-z)
+          </Dropdown.Item>
+
+          <Dropdown.Item onClick={() => {
+            setFilter('class')
+            setAscending(false)}}>
+            Class (z-a)
+          </Dropdown.Item>
+
+          <Dropdown.Item onClick={() => {
+            setFilter('length')
+            setAscending(true)}}>
+            Length (shortest - longest)
+          </Dropdown.Item>
+
+          <Dropdown.Item onClick={() => {
+            setFilter('length')
+            setAscending(false)}}>
+            Length (longest - shortest)
+          </Dropdown.Item>
+
+          <Dropdown.Item onClick={() => {
+            setFilter('date')
+            setAscending(true)}}>
+            Date (oldest)
+          </Dropdown.Item>
+
+          <Dropdown.Item onClick={() => {
+            setFilter('date')
+            setAscending(false)}}>
+            Date (newest)
+          </Dropdown.Item>
+
+          <Dropdown.Item onClick={() => {
+            setAscending(true)
+            setFilter('title')}}>
+            Title (a-z)
+          </Dropdown.Item>
+
+          <Dropdown.Item onClick={() => {
+            setAscending(false)
+            setFilter('title')}}>
+            Title (z-a)
+          </Dropdown.Item>
+
         </Dropdown.Menu>
       </Dropdown>
 
