@@ -28,19 +28,37 @@ function Saved() {
 
 
   const handleFilter = async () => {
-    // depening on filter
-    const {data , error} = await supabase
-    .from('Saved')
-    .select('*')
-    .order(filter, {ascending: false})
+    if (filter == 'title') {
+      // depening on filter
+      const {data , error} = await supabase
+      .from('Saved')
+      .select('*')
+      .order(filter, {ascending: true})
 
-    if(data){
-      console.log('FIL data', data)
-      setSaved(data)
+      if(data){
+        console.log('FIL data', data)
+        setSaved(data)
+      }
+      if(error){
+        console.log("FIL ERR", error)
+      }
     }
-    if(error){
-      console.log("FIL ERR", error)
+    else {
+      // depening on filter
+      const {data , error} = await supabase
+      .from('Saved')
+      .select('*')
+      .order(filter, {ascending: false})
+
+      if(data){
+        console.log('FIL data', data)
+        setSaved(data)
+      }
+      if(error){
+        console.log("FIL ERR", error)
+      }
     }
+
   }
 
 
@@ -58,9 +76,14 @@ function Saved() {
         Filter by
         <Dropdown.Toggle variant="success" id="dropdown-basic">{filter}</Dropdown.Toggle>
         <Dropdown.Menu>
-          <Dropdown.Item onClick={() => setFilter('class')}>Class</Dropdown.Item>
-          <Dropdown.Item onClick={() => setFilter('length')}>Length</Dropdown.Item>
-          <Dropdown.Item onClick={() => setFilter('date')}>Date</Dropdown.Item>
+          <Dropdown.Item onClick={() => setFilter('class')}>Class (a-z)</Dropdown.Item>
+          <Dropdown.Item onClick={() => setFilter('class')}>Class (z-a)</Dropdown.Item>
+          <Dropdown.Item onClick={() => setFilter('length')}>Length (shortest - longest)</Dropdown.Item>
+          <Dropdown.Item onClick={() => setFilter('length')}>Length (longest - shortest)</Dropdown.Item>
+          <Dropdown.Item onClick={() => setFilter('date')}>Date (earliest)</Dropdown.Item>
+          <Dropdown.Item onClick={() => setFilter('date')}>Date (latest)</Dropdown.Item>
+          <Dropdown.Item onClick={() => setFilter('title')}>Title (a-z)</Dropdown.Item>
+          <Dropdown.Item onClick={() => setFilter('title')}>Title (z-a)</Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
 
