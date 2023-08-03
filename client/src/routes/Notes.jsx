@@ -50,10 +50,10 @@ function Notes() {
             </Col>
             <Col>
 
-              <Tab.Content>
+              <Tab.Content className='note-tab-content'>
                 {notes.map((e) => (
-                  <Tab.Pane eventKey={e.videoId}>
-                    <Note videoID={e.videoId} data={e.Notes} />
+                  <Tab.Pane className='note-tab-content' eventKey={e.videoId}>
+                    <Note title={e.title} videoID={e.videoId} data={e.Notes} />
                   </Tab.Pane>
                 ))}
               </Tab.Content>

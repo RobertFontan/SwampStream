@@ -25,7 +25,9 @@
   font-family: 'Inter', sans-serif;
   --secondary-background: #FBFBFB;
   --btn-color: #e5e5e5;
-  /* height: 100vh; */
+  /* height: 100%; */
+
+
 }
 
 /* Content - Main Screen */
@@ -39,6 +41,7 @@
 /* Nav bar */
 .navbar-col {
   padding: 0px !important;
+  height: 150vh !important;
 }
 
 .nav{
@@ -51,7 +54,9 @@
   padding: 10px;
   background-color: var(--secondary-background);
   border-right: 1px solid lightgray;
+  
   height: 100%;
+
 }
 
 .nav h3{
@@ -65,7 +70,7 @@
   padding-top: 10px;
   padding-bottom: 10px;
   padding-left: 32px;
-  width: 15vw;
+  width: 100%;
   /*margin: 10px 10px 10px 10px;*/
   transition: 0.2s;
   font-weight: 200;
@@ -414,6 +419,7 @@
 }
 .nav-item{
   width: 100% !important;
+  border-bottom: 1px solid #888888 !important;
 }
 .nav-link {
   width: 100% !important;
@@ -423,6 +429,11 @@
 
 .nav-col{
   padding: 0px !important;
+
+}
+
+.note-tab-content{
+  height: 100% !important;
 }
 
 /* Note component */
@@ -434,11 +445,18 @@
   width: 100%;
 }
 
+.note h3{
+  padding-top: 25px;
+  padding-left: 20px;
+}
+
 .note-save{
-  margin: 10px !important;
+  /* padding-left: 20px !important; */
+  margin: 15px !important;
 }
 
 .note textarea {
+  padding-left: 20px;
   resize: none;
   width: 100%;
   height: 100%;
@@ -448,4 +466,9 @@
   background-color: transparent;
   color: #000000;
   font-size: large;
+}
+
+.brand{
+  text-align: center !important;
+  margin: 0px !important;
 }

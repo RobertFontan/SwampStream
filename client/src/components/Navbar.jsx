@@ -14,12 +14,11 @@ function NavBar(){
     }, [location])
     return(
         <Navbar className='nav'>
-            <Navbar.Brand>SwampStream</Navbar.Brand>
+            <Navbar.Brand className='brand'>SwampStream</Navbar.Brand>
             <NavLink className={splitLocation[1] === "home" ? "active" : ""} to="/"> HOME </NavLink>
             <NavLink className={splitLocation[1].indexOf("watching") != -1 ? "active" : ""} to="/watching">WATCHING</NavLink>
             <NavLink className={splitLocation[1] === "notes" ? "active" : ""} to="/notes">NOTES</NavLink>
             <NavLink className={splitLocation[1] === "saved" ? "active" : ""} to="/saved">SAVED VIDEOS</NavLink>
-            <NavLink className={splitLocation[1] === "history" ? "active" : ""} to="/history">HISTORY</NavLink>
         </Navbar>
     )
 

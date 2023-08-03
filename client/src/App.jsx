@@ -5,9 +5,6 @@ import './App.css'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-
-import Login from './routes/Login'
-import History from './routes/History'
 import Home from './routes/Home'
 import Notes from './routes/Notes'
 import Saved from './routes/Saved'
@@ -35,7 +32,6 @@ function App() {
                    <Route path="/watching/:course/:videoID" element={<Watching />}/>
                    <Route path="/notes" element={<Notes />}/>
                    <Route path="/saved" element={<Saved />}/>
-                   <Route path="/history" element={<History />}/>
               </Routes>
             </Col>
           </Row>

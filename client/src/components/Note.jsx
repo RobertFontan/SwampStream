@@ -3,7 +3,7 @@ import { Button } from "react-bootstrap";
 
 import supabase from "../config/supabaseClient";
 
-function Note({videoID, data}) {
+function Note({title, videoID, data}) {
   const [notes, setNotes] = useState(data)
 
   const handleSave = async () => {
@@ -23,6 +23,7 @@ function Note({videoID, data}) {
 
   return (
     <div className='note'>
+      <h3>{title}</h3>
       <Button variant="dark" className="note-save" onClick={handleSave}>Save</Button>
       <textarea key={videoID} value={notes} rows='4' cols='50' onChange={(e) => setNotes(e.target.value)}/>
     </div>

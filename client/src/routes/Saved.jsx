@@ -76,7 +76,10 @@ function Saved() {
         <h5>Filter by</h5>
         <Dropdown.Toggle variant="secondary" >{filter}</Dropdown.Toggle>
         <Dropdown.Menu>
-          <Dropdown.Item onClick={() => setFilter('class')}>Class (a-z)</Dropdown.Item>
+          <Dropdown.Item onClick={() => {
+            setFilter('class')
+            setAscending()
+            }}>Class (a-z)</Dropdown.Item>
           <Dropdown.Item onClick={() => setFilter('class')}>Class (z-a)</Dropdown.Item>
           <Dropdown.Item onClick={() => setFilter('length')}>Length (shortest - longest)</Dropdown.Item>
           <Dropdown.Item onClick={() => setFilter('length')}>Length (longest - shortest)</Dropdown.Item>
