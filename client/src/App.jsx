@@ -22,10 +22,10 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Container fluid>
+      <Container fluid className="app-container">
         {/* <div className='App'> */}
           <Row className="App">
-            <Col lg={2}>
+            <Col lg={2} className="navbar-col">
               <NavBar />
             </Col>
             <Col className="content">
