@@ -69,12 +69,12 @@ function Saved() {
 
 
   return (
-    <div>
+    <div className='saved'>
       <h1>Saved</h1>
-      {/* <Button onClick={handleFilter}> Test</Button> */}
-      <Dropdown>
-        Filter by
-        <Dropdown.Toggle variant="success" id="dropdown-basic">{filter}</Dropdown.Toggle>
+
+      <Dropdown data-bs-theme="dark" className='saved-page-dropdown'>
+        <h5>Filter by</h5>
+        <Dropdown.Toggle variant="secondary" >{filter}</Dropdown.Toggle>
         <Dropdown.Menu>
           <Dropdown.Item onClick={() => setFilter('class')}>Class (a-z)</Dropdown.Item>
           <Dropdown.Item onClick={() => setFilter('class')}>Class (z-a)</Dropdown.Item>
