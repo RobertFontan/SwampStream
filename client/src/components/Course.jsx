@@ -11,7 +11,7 @@ function Course({course}) {
   const [videos, setVideos] = useState(null)
 
   const API_KEY = "AIzaSyCIFWHUm93iCiFfytTQGPtu-MzyXoUrIAY"
-  const fetchURL = `https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=5&playlistId=${course.playlistID}&key=${API_KEY}`
+  const fetchURL = `https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=10&playlistId=${course.playlistID}&key=${API_KEY}`
 
 
 
@@ -48,7 +48,7 @@ function Course({course}) {
     <>
     {videos && <div className='course'>
         <h1>{course.title}</h1>
-        <div className="course-videos">{videos.filter((item, index) => index < 4).map(vid => <Video course={course.title.slice(0,7)} video={vid} />)}</div>
+        <div className="course-videos">{videos.filter((item, index) => index < 11).map(vid => <Video course={course.title.slice(0,7)} video={vid} />)}</div>
     </div>
     }
     </>
