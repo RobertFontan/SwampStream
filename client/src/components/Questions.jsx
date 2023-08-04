@@ -34,7 +34,7 @@ function Questions() {
       </Form>
       <div className='question-container'>
         {questionRes && <div className='answer'>
-                <h3>Generated Summary</h3>
+                <h3>Generated Questions</h3>
                 <p>{questionRes}</p></div>}
       </div>
     </div>
