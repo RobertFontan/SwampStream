@@ -63,37 +63,39 @@ function Summarize() {
   }
 
   return (
-    <div>
-        <Form onSubmit={fetchData}>  
+    <div className='summ'>
+        <Form onSubmit={fetchData} className='summ-form'>  
             <div className="header">
-                Summarize using GPT in:
-                <InputGroup >
+              <ol>
+                <li>Copy and Paste</li>
+                <li>Summarize using GPT using options</li>
+              </ol>
+              <InputGroup className='summarize-dropdown'>
                   <Form.Control size='lg' value={numb} onChange={(e) => setNumb(e.target.value)}/>
                   <DropdownButton
-                    variant="outline-secondary"
+                    variant="success"
                     title={option}
                     align="end"
+                    className='summ-dropdown-menu'
                   >
                     <Dropdown.Item onClick={() => setOption('paragraph(s)')}>paragraph(s)</Dropdown.Item>
                     <Dropdown.Item onClick={() => setOption('sentence(s)')}>sentence(s)</Dropdown.Item>
                   </DropdownButton>
-                  
                 </InputGroup>
-
-                <Button variant='success' type='submit'> Summarize!</Button>
-
             </div>
 
-        
-            <textarea value={text} rows='4' cols='40' onChange={(e) => setText(e.target.value)}/>
-
-            <p>Estimated Tokens: {countTokens(text)}</p>
-
+            <textarea id='sum-text' value={text} rows='4' cols='40' onChange={(e) => setText(e.target.value)}/>
+            
+            <Button className='generate' variant='success' type='submit'> Summarize!</Button>
         </Form>
 
 
         <div className='summary-container'>
-            {summary && <p>{summary}</p>}
+            {summary && 
+              <div className='answer'>
+                <h3>Generated Summary</h3>
+                <p>{summary}</p></div>
+            }
         </div>
     </div>
   )

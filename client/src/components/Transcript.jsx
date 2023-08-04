@@ -33,14 +33,18 @@ function Transcript({videoId}) {
   }
 
    const handleUpdate = async () => {
-    console.log('going to update')
+    console.log('going to update', transcript)
     const {data, error} = await supabase
     .from('Notes')
-    .update({'transcript': transcript})
+    .insert({'transcript': transcript})
     .eq('videoId', videoId)
     if(data){
       console.log('update successful')
     }
+    if(error){
+      console.log('err', error)
+    }
+    console.log('update done')
   }
 
 
@@ -64,6 +68,7 @@ function Transcript({videoId}) {
       
     }
     if(error){
+      fetchTranscriptData()
       console.error('tdataerror', error)
     }
   }

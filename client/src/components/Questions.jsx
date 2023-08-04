@@ -28,12 +28,14 @@ function Questions() {
         <Form.Label>Make Questions from the following:</Form.Label>
         {/* <Form.Control size='lg' value={numb} onChange={(e) => setNumb(e.target.value)}/> */}
         <Form.Control as="textarea" rows={3} value={text} onChange={(e)=>setText(e.target.value)}/>
-        <Button type='submit'>Generate</Button>
+        <Button variant='success' className='generate' type='submit'>Generate</Button>
 
         </Form.Group>
       </Form>
       <div className='question-container'>
-        {questionRes && <p>{questionRes}</p>}
+        {questionRes && <div className='answer'>
+                <h3>Generated Summary</h3>
+                <p>{questionRes}</p></div>}
       </div>
     </div>
   )

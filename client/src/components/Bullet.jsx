@@ -31,12 +31,14 @@ function Bullet() {
         <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
         <Form.Label>Make a Bulleted List from the following:</Form.Label>
         {/* <Form.Control size='lg' value={numb} onChange={(e) => setNumb(e.target.value)}/> */}
-        <Form.Control as="textarea" rows={3} value={text} onChange={(e)=>setText(e.target.value)}/>
-        <Button type='submit'>Generate</Button>
+        <Form.Control className='bullet-text' as="textarea" rows={3} value={text} onChange={(e)=>setText(e.target.value)}/>
+        <Button className='generate' variant='success'type='submit'>Generate</Button>
         </Form.Group>
       </Form>
       <div className='list-container'>
-        {listRes && <p>{listRes}</p>}
+        {listRes && <div className='answer'>
+                <h3>Generated Bullet</h3>
+                <p>{listRes}</p></div>}
       </div>
     </div>
   )

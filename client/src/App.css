@@ -231,15 +231,25 @@
   background-color: var(--btn-color);
   color: black;
   border: 0px;
+  /* width: 120px; */
+}
+
+.button-container .btn{
+  width: 120px;
 }
 
 .sidebar{
   width: 400px;
   margin-top: 20px;
   border-radius: 10px;
-  padding: 15px;
-  background-color: lightgray;
-  height: 500px;
+  padding: 30px;
+  
+  background-color: #f4f4f4;
+  /* border: 1px solid #aaaaaa; */
+  /* offset-x | offset-y | blur-radius | color */
+  /* box-shadow: 5px 5px 40px #acabab; */
+  
+  height: 660px;
   overflow: scroll;
 }
 
@@ -274,20 +284,38 @@
   resize: none;
   width: 100%;
   height: 100%;
-  /* border: 1px black solid; */
-  border: none;
-  outline: none;
-  background-color: transparent;
+  border: 1px white solid;
+  border-radius: 25px;
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 30px;
+  /* outline: none; */
+  /* background-color: transparent; */
   color: #000000;
   font-size: large;
 }
+/* Description */
+
+#description{
+  padding: 20px;
+  background-color: #eeeeee;
+  border-radius: 20px;
+}
 
 /* Comments */
+.comments{
+  height: 1000px;
+}
 .comment{
-  background-color: lightgrey;
+  background-color: #eeeeee;
   display: flex;
+  flex-direction: column;
   gap: 5px;
-  border-bottom: 0.5px solid black;
+  /* border-bottom: 0.5px solid black; */
+  padding: 20px;
+  margin-bottom: 15px;
+  border-radius: 20px;
+
   
 }
 
@@ -306,47 +334,106 @@
 
 /* Timestamp Container */
 .timestamp-container{
+  margin-top: 15px;
   display: flex;
   flex-direction: row;
   gap: 5px;
-  background-color: grey;
+  background-color: rgb(214, 214, 214);
   padding: 10px;
   border-radius: 10px;
 }
 
-/* AI Container */
-.ai-container {
-  width: 400px;
-  margin-top: 20px;
-  border-radius: 10px;
-  padding: 15px;
-  background-color: lightgray;
-  height: 200px;
-  overflow: scroll;
-}
-
-.ai-container textarea{
-  resize: none;
-  width: 100%;
-  height: 100%;
-  /* border: 1px black solid; */
-  border: none;
-  outline: none;
-  background-color: transparent;
-  color: #000000;
-  font-size: large;
-}
-
-.summ-container .header {
+.note-sidebar .header{
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  gap: 20px;
+  font-size: 20px !important;
   
 }
 
+.note-sidebar-btn {
+  background-color: rgb(214, 214, 214) !important;
+}
+
+.timestamp-btn{
+  background-color: white !important;
+  height: fit-content !important;
+  width: fit-content !important;
+}
+
+/* AI Container */
+.ai-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.answer{
+  background-color: black;
+  color: white;
+  margin-top: 20px;
+  padding: 20px;
+  border-radius: 15px;
+}
+
+#dropdown-basic-menu{
+  background-color: white;
+}
 .input-group {
   width: 200px !important;
 }
+
+.ai-component-header{
+  background-color: rgb(225, 245, 225) !important;
+  display: flex !important;
+  padding-bottom: 0px !important;
+}
+
+.dropdown-basic-ai{
+  text-align: center !important;
+  border-radius: 30px !important;
+  justify-self: center !important;
+}
+
+.dropdown-container-ai{
+  align-self: center !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 15px !important;
+}
+
+.ai-component-body{
+  background-color: rgb(225, 245, 225) !important;
+}
+
+/* Summarize */
+.summ-form{
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+}
+
+.summ textarea{
+  border-radius: 15px;
+
+}
+.dropdown-toggle .btn .btn-outline-secondary{
+  background-color: white !important;
+
+}
+.generate{
+  border-radius: 40px !important;
+  margin-top: 20px !important;
+  width: 125px;
+
+  /* align-self: center; */
+}
+
+/* list */
+.form-control{
+  border-radius: 15px !important;
+}
+
 /* Saved Page */
 .saved{
   margin-top: 20px;
