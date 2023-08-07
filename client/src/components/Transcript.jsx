@@ -26,51 +26,49 @@ function Transcript({videoId}) {
 
     const response = await axios.request(options);
     setTranscript(response.data) // text transcript
-    // update supabase
-    handleUpdate()
 
-
+    // update supabase -- handleUpdate()
+    insertNewTranscript(response.data)
   }
 
-   const handleUpdate = async () => {
-    console.log('going to update', transcript)
+   const insertNewTranscript = async (newInfo) => {
+    console.log('going to insert into supabase', newInfo)
     const {data, error} = await supabase
     .from('Notes')
-    .insert({'transcript': transcript})
-    .eq('videoId', videoId)
+    .insert({videoId, transcript: newInfo})
+    //.eq('videoId', videoId)
     if(data){
-      console.log('update successful')
+      console.log('update successful data inserted', data)
     }
     if(error){
-      console.log('err', error)
+      console.log('update error', error)
     }
     console.log('update done')
+
   }
 
 
   const fetchDatabaseData = async () => {
+    console.log('checking data base')
     const { data, error } = await supabase
     .from('Notes')
     .select('transcript')
     .eq('videoId', videoId)
     .single()
     
-    if (data) {
-      //console.log('tdata', data)
-      if(data.transcript == null){
-        console.log('data is null')
-        fetchTranscriptData()
-      }
-      else{
-        setTranscript(data.transcript)
-
-      }
-      
+    if (data) { // this is terrible
+      console.log('database on data', data)
+      setTranscript(data.transcript)
+      // if(data.transcript == null){
+      //   fetchTranscriptData()
+      // }
     }
     if(error){
+      console.error('database error, calling api', error) // this is what should happen
       fetchTranscriptData()
-      console.error('tdataerror', error)
     }
+
+    
   }
 
   useEffect(() => {
