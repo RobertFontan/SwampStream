@@ -1,6 +1,6 @@
 export default [
     {
-        title: 'CEN4721 - Human Computing Interaction',
+        title: 'CEN4721 - Human Computer Interaction',
         playlistID: 'PLLssT5z_DsK_nusHL_Mjt87THSTlgrsyJ'
 
     },
@@ -13,7 +13,7 @@ export default [
         playlistID: 'PLBlnK6fEyqRiVhbXDGLXDk_OQAeuVcp2O'
     },  
     {
-        title: 'CAP 4641 - Natural Language Processing',
+        title: 'CAP4641 - Natural Language Processing',
         playlistID: 'PLQY2H8rRoyvzDbLUZkbudP-MFQZwNmU4S'
     }
 ]

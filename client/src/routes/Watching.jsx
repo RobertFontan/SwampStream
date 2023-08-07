@@ -117,21 +117,22 @@ function Watching() {
       <Col lg={6} className="left-screen">
         
         <div className="video-player">
+          
+          <Youtube videoId={videoID} opts={opts} onReady={onReady} />
           <div className="header">
-            <h6>{title}</h6>
+            <h3>{title}</h3>
             <DownloadComponent videoId={videoID} />
             <SaveButton title={title} videoID={videoID} videoData={videoData} saveData={saveData} />
           </div>
-          <Youtube videoId={videoID} opts={opts} onReady={onReady} />
         </div>        
-        <Accordion flush>
+        <Accordion flush alwaysOpen>
           <Accordion.Item eventKey='0'>
             <Accordion.Header>Description</Accordion.Header>
             <Accordion.Body>{description && <div id="description">{description}</div>}</Accordion.Body>
           </Accordion.Item>
 
             <Accordion.Item eventKey='1'>
-              <Accordion.Header>Commments</Accordion.Header>
+              <Accordion.Header>Comments</Accordion.Header>
               <Accordion.Body><Comment videoId={videoID} /></Accordion.Body>
             </Accordion.Item>
 
@@ -145,8 +146,6 @@ function Watching() {
           </div>
           <div className="sidebar">
             {sidebar === "transcript" ? <Transcript videoId={videoID}/>: <NotesSidebar pRef={playerRef}title={title} videoId={videoID} />}
-          </div>
-          <div className="ai-container">
           </div>
         </Col>
       </Row>

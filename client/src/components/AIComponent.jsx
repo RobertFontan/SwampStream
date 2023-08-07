@@ -17,11 +17,11 @@ function AIComponent() {
     const handleShow = () => setShow(true);
 
 
-    const [option, setOption] = useState('Summarize')
+    const [option, setOption] = useState('Summary')
 
     const renderOption = () => {
       switch(option){
-        case 'Summarize':
+        case 'Summary':
           return <Summarize />
         case 'List':
           return <Bullet />
@@ -34,28 +34,29 @@ function AIComponent() {
     
 
   return (
-    <div className='summ-container'>
+    <div className='ai-container'>
       <Button variant='primary' onClick={handleShow}>
         <Robot>GPT</Robot>
       </Button>
        
         
-      <Offcanvas show={show} onHide={handleClose} backdrop="static">
-        <Offcanvas.Header closeButton>
-          <Offcanvas.Title>
-          <Dropdown>
-            <Dropdown.Toggle variant="success" id="dropdown-basic">
-              GPT Features: {option}
-            </Dropdown.Toggle>
-            <Dropdown.Menu>
-              <Dropdown.Item onClick={() => setOption('Summarize')}>Summarize</Dropdown.Item>
-              <Dropdown.Item onClick={() => setOption('List')}>List</Dropdown.Item>
-              <Dropdown.Item onClick={() => setOption('Questions')}>Questions</Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown>
+      <Offcanvas show={show} onHide={handleClose} backdrop="static" >
+        <Offcanvas.Header closeButton className='ai-component-header'>
+          <Offcanvas.Title className='dropdown-container-ai'>
+            <h2>{option}</h2>
+            <Dropdown className='dropdown'>
+              <Dropdown.Toggle variant="success" className="dropdown-basic-ai">
+                Generate the following: {option}
+              </Dropdown.Toggle>
+              <Dropdown.Menu id='dropdown-basic-menu'>
+                <Dropdown.Item onClick={() => setOption('Summary')}>Summary</Dropdown.Item>
+                <Dropdown.Item onClick={() => setOption('List')}>List</Dropdown.Item>
+                <Dropdown.Item onClick={() => setOption('Questions')}>Questions</Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
           </Offcanvas.Title>
         </Offcanvas.Header>
-        <Offcanvas.Body>
+        <Offcanvas.Body className='ai-component-body'>
           {renderOption()}
         </Offcanvas.Body>
       </Offcanvas>

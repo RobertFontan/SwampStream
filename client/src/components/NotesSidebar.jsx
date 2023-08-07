@@ -62,23 +62,6 @@ function NotesSidebar({pRef ,title ,videoId}) {
     }
   }
 
-  // const handleTimeStampSave = async () => {
-  //   console.log('local timestamp', timestamps)
-  //   const {data, error} = await supabase
-  //   .from('Notes')
-  //   .update({Timestamps: timestamps})
-  //   .eq('videoId', videoId)
-  //   .select()
-
-  //   console.log('d timestamp', data)
-  //   console.log('e timestamp', error)
-
-  //   // if(error == null){
-  //   //   const { error } = await supabase
-  //   //   .from('Notes')
-  //   //   .insert({ 'timestamps': timestamps })
-  //   // }
-  // }
 
   // on submit
   const handleSubmit = (e) => {
@@ -126,8 +109,10 @@ function NotesSidebar({pRef ,title ,videoId}) {
   
   return (
     <div className='note-sidebar'>
-        <Button onClick={handleSave} variant="outline-primary" size="sm">Save</Button>
-        <Button onClick={handleShow}>Create TimeStamp</Button>
+        <div className="header">
+          <Button onClick={handleSave} className='note-sidebar-btn'variant="outline-primary">Save</Button>
+          <Button onClick={handleShow} className='note-sidebar-btn'>Create TimeStamp</Button>
+        </div>
 
         {pRef.current && <Alert onClose={() => setShow(false)}variant="light" show={show} dismissible>
           <Alert.Heading>Timestamp at {fancyTimeFormat(pRef.current.getCurrentTime())}</Alert.Heading>
@@ -136,10 +121,10 @@ function NotesSidebar({pRef ,title ,videoId}) {
             <input type="submit" value='Create' />
           </form>
         </Alert>}
-        
+        {timestamps &&
         <div className="timestamp-container">
-          {timestamps && timestamps.map((e) => (<Button variant="info" onClick={() => timeStampClick(e.seconds)}>{e.display}</Button>))}
-        </div>
+           {timestamps.map((e) => (<Button className='timestamp-btn' variant="info" onClick={() => timeStampClick(e.seconds)}>{e.display}</Button>))}
+        </div>}
         <textarea value={notes} rows='4' cols='50' onChange={(e) => setNotes(e.target.value)}/>
     </div>
   )
