@@ -334,13 +334,24 @@
 
 /* Timestamp Container */
 .timestamp-container{
-  margin-top: 15px;
+  
   display: flex;
-  flex-direction: row;
-  gap: 5px;
+  flex-wrap: wrap; /* Allows items to wrap onto next line */
+  gap: 5px; 
+
+  margin-top: 15px;
+
   background-color: rgb(214, 214, 214);
   padding: 10px;
   border-radius: 10px;
+}
+
+.timestamp-btn{
+  background-color: white !important;
+  height: min-content !important;
+  width: min-content !important;
+  line-height: normal !important;
+ /* This makes sure that the items don't grow or shrink but take their natural width */
 }
 
 .note-sidebar .header{
@@ -354,11 +365,7 @@
   background-color: rgb(214, 214, 214) !important;
 }
 
-.timestamp-btn{
-  background-color: white !important;
-  height: fit-content !important;
-  width: fit-content !important;
-}
+
 
 /* AI Container */
 .ai-container {

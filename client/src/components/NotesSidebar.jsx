@@ -46,7 +46,7 @@ function NotesSidebar({pRef ,title ,videoId}) {
     if(error == null){
       const { error } = await supabase
       .from('Notes')
-      .insert({ title: title, videoId, Notes: notes })
+      .insert({ Timestamps: timestamps, title: title, videoId, Notes: notes })
     }
   }
 
@@ -63,7 +63,7 @@ function NotesSidebar({pRef ,title ,videoId}) {
   }
 
 
-  // on submit
+  // on submitting timestamps
   const handleSubmit = (e) => {
     e.preventDefault()
     const newDisplay = display
