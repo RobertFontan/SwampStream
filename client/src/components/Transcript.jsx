@@ -84,7 +84,8 @@ function Transcript({videoId}) {
     {name: 'Portuguese', code: 'pt'},
     {name: 'Simplified Chinese', code: 'zh-CN'},
     {name: 'French' , code:'fr'},
-    {name: 'Italian' ,code: 'it'}
+    {name: 'Italian' ,code: 'it'},
+    {name: 'Tagalog', code: 'tl'}
   ]
 
   const [lang, setLang] = useState(mappings[0])

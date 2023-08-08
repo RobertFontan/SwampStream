@@ -337,16 +337,23 @@
   
   display: flex;
   flex-wrap: wrap; /* Allows items to wrap onto next line */
-  gap: 5px; 
-
+   
+  justify-content: baseline;
+  align-items: center;
   margin-top: 15px;
+  gap: 4px;
 
   background-color: rgb(214, 214, 214);
-  padding: 10px;
+  padding-top: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-bottom: 10px;
   border-radius: 10px;
 }
 
 .timestamp-btn{
+  font-size: small !important;
+  margin: 0px !important;
   background-color: white !important;
   height: min-content !important;
   width: min-content !important;
